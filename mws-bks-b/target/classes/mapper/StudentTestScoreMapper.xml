@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.StudentTestScoreDao">
+
+
+    <select id="gradeAchievementSum" resultType="com.benwunet.bks.entity.dto.StudentTestScoreDTO">
+        SELECT
+         school as name,
+         COUNT(1) as counter,
+         SUM(ifnull(subject_yuwen,0)+
+         ifnull(subject_shuxue,0)+
+         ifnull(subject_yingyu,0)+
+         ifnull(subject_dili,0)+
+         ifnull(subject_wuli,0)+
+         ifnull(subject_shengwu,0)+
+         ifnull(subject_huaxue,0)+
+         ifnull(subject_lishi,0)+
+         ifnull(subject_zhenzhi,0)) as summery
+        FROM bks_student_testscore
+        WHERE exam_name = #{examName}
+        GROUP BY school
+    </select>
+
+    <select id="provincesAchievementSum" resultType="com.benwunet.bks.entity.dto.StudentTestScoreDTO">
+        SELECT
+                               '重庆市' as name,
+         COUNT(1) as counter,
+         SUM(ifnull(subject_yuwen,0)+
+         ifnull(subject_shuxue,0)+
+         ifnull(subject_yingyu,0)+
+         ifnull(subject_dili,0)+
+         ifnull(subject_wuli,0)+
+         ifnull(subject_shengwu,0)+
+         ifnull(subject_huaxue,0)+
+         ifnull(subject_lishi,0)+
+         ifnull(subject_zhenzhi,0)) as summery
+        FROM bks_student_testscore
+        WHERE exam_name = #{examName}
+    </select>
+    <select id="districtSum" resultType="com.benwunet.bks.entity.dto.StudentTestScoreDTO">
+        SELECT
+         district as name,
+         COUNT(1) as counter,
+         SUM(ifnull(subject_yuwen,0)+
+         ifnull(subject_shuxue,0)+
+         ifnull(subject_yingyu,0)+
+         ifnull(subject_dili,0)+
+         ifnull(subject_wuli,0)+
+         ifnull(subject_shengwu,0)+
+         ifnull(subject_huaxue,0)+
+         ifnull(subject_lishi,0)+
+         ifnull(subject_zhenzhi,0)) as summery
+        FROM bks_student_testscore
+        WHERE exam_name = #{examName}
+        GROUP BY district
+
+    </select>
+</mapper>

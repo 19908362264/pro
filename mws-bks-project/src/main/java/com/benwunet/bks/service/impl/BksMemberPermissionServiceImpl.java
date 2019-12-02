@@ -1,0 +1,20 @@
+package com.benwunet.bks.service.impl;
+
+import com.benwunet.bks.dao.BksMemberPermissionMapper;
+import com.benwunet.bks.model.BksMemberPermission;
+import com.benwunet.bks.service.BksMemberPermissionService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * 会员权限表 服务实现类
+ * </p>
+ *
+ * @author zhoux
+ * @since 2019-11-15
+ */
+@Service
+public class BksMemberPermissionServiceImpl extends ServiceImpl<BksMemberPermissionMapper, BksMemberPermission> implements BksMemberPermissionService {
+
+}

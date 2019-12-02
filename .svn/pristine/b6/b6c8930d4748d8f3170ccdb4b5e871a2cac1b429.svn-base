@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mws</artifactId>
+        <groupId>com.benwunet.mws</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mws-gateway-zuul</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-result</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>10.2.0</version>
+        </dependency>
+
+        <!--注册中心客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--配置中心客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+        <!-- web的依赖，必须加 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--网关zuul-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+        <!--认证中心-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <!--feign客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--自定义base实体类模块-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--自定义日志实体类模块-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--自定义认证实体类模块-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-oauth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
+        <!-- swagger 自动生成文档 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <!--服务链路追踪-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-papertrace</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-bks</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-notification</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.benwunet.bks</groupId>-->
+            <!--<artifactId>mws-bks-b</artifactId>-->
+            <!--<version>1.0.0</version>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.benwunet.mws</groupId>
+            <artifactId>mws-commons</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <finalName>${project.artifactId}</finalName><!--打jar包去掉版本号-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.benwunet.mws.gateway.GatewayZuulApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

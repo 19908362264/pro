@@ -1,0 +1,64 @@
+@charset "utf-8";
+/**
+ * Style V1.0
+ * Author fuxiaoqing
+ * Update date @2019-03-21
+ */
+
+.indexSlide{height: 450px;}
+.indexSlide .swiper-slide{background-position: top center}
+
+.card{padding: 80px 0 0;}
+.card .card-hd{}
+.card .card-hd .tit{height: 54px;line-height: 54px;text-align:center;font-size:34px;font-weight:bold;overflow: hidden}
+.card .card-hd .con{height: 34px;line-height: 34px;text-align:center;overflow: hidden}
+
+
+
+
+/*填志愿*/
+.rec-volunteer{}
+.rec-volunteer .card-bd{padding: 60px 0 20px;}
+.rec-volunteer ul{margin-right: -30px;}
+.rec-volunteer ul li{float: left;display: block;margin:0 10px 70px 0;width:232px;text-align:center;overflow: hidden;}
+.rec-volunteer ul li .pic{height: 80px;overflow: hidden;}
+.rec-volunteer ul li .pic img{width:80px;height: 80px;}
+.rec-volunteer ul li .tit{height:30px;line-height:30px;font-size: 16px;font-weight: bold;color: #3878b5;overflow: hidden;}
+.rec-volunteer ul li .con{height: 30px;line-height: 30px;color:#969696;overflow: hidden}
+
+
+/*精品课程*/
+.excellent-course{padding-bottom:80px;background-color: #f6f6f6;}
+.excellent-course .tabs{padding: 30px 0 0;}
+.excellent-course .tabs-hd{text-align: center;}
+.excellent-course .tabs-tab{display: inline-block;margin-left:20px;padding: 0 30px;height:56px;line-height: 56px;font-size:16px;color:#787878;border-bottom: 4px solid transparent;}
+.excellent-course .tabs-tab:first-child{margin-left:0;}
+.excellent-course .tabs-tab.on{color: #33beff;border-bottom-color: #33beff}
+.excellent-course .tabs-bd{padding: 40px 0 0;}
+.excellent-course ul{margin-right: -30px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

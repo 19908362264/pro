@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksExamNewsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benwunet.bks.model.BksExamNews">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="head_image" property="headImage" />
+        <result column="release_time" property="releaseTime" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="operator_id" property="operatorId" />
+        <result column="operator_name" property="operatorName" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, content, user_id, user_name, head_image, release_time, gmt_create, gmt_modified, operator_id, operator_name, remark
+    </sql>
+
+</mapper>

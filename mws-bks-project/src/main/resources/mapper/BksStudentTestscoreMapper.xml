@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksStudentTestscoreDao">
+
+
+    <select id="getExamList" resultType="com.benwunet.bks.model.dto.BksExamDTO">
+        SELECT
+        a.student_id,
+        a.name,
+        a.district,
+        a.school,
+        a.exam_name,
+        a.subject_yuwen,
+        a.subject_shuxue,
+        a.subject_yingyu,
+        case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,
+        case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,
+        case when INSTR(subject_comb,'6')>0 then subject_dili else null end subject_dili,
+        case when INSTR(subject_comb,'8')>0 then subject_huaxue else null end subject_huaxue,
+        case when INSTR(subject_comb,'9')>0 then subject_shengwu else null end subject_shengwu,
+        case when INSTR(subject_comb,'4')>0 then subject_zhenzhi else null end subject_zhenzhi,
+        subject_comb,
+        a.gmt_create,
+        a.gmt_modified,
+        a.operator_id,
+        a.operator_name,
+        a.remark
+        FROM
+        bks_student_testscore  AS a
+        <where>
+            a.student_id=#{userId}
+            <if test="examId != null and examId != ''">
+                and a.exam_name=#{examId}
+            </if>
+
+        </where>
+
+    </select>
+
+
+
+
+    <select id="getExamAnalyse" resultType="com.benwunet.bks.model.dto.BksExamDTO">
+        SELECT
+        a.student_id,
+        a.name,
+        a.district,
+        a.school,
+        a.exam_name,
+        a.subject_yuwen,
+        a.subject_shuxue,
+        a.subject_yingyu,
+        case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,
+        case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,
+        case when INSTR(subject_comb,'6')>0 then subject_dili else null end subject_dili,
+        case when INSTR(subject_comb,'8')>0 then subject_huaxue else null end subject_huaxue,
+        case when INSTR(subject_comb,'9')>0 then subject_shengwu else null end subject_shengwu,
+        case when INSTR(subject_comb,'4')>0 then subject_zhenzhi else null end subject_zhenzhi,
+        subject_comb,
+        a.gmt_create,
+        a.gmt_modified,
+        a.operator_id,
+        a.operator_name,
+        a.remark
+        FROM
+        bks_student_testscore  AS a
+        where
+            a.student_id=#{userId}
+    </select>
+    <select id="getStudetnScore" resultType="com.benwunet.bks.model.BksStudentTestscore">
+        select REPLACE(CONCAT('[',case when INSTR(subject_comb,'7')>1 then '7,' else '' end,case when INSTR(subject_comb,'5')>1 then '5,' else '' end,case when INSTR(subject_comb,'4')>1 then '4,' else '' end,case when INSTR(subject_comb,'6')>1 then '6,' else '' end,case when INSTR(subject_comb,'8')>1 then '8,' else '' end,case when INSTR(subject_comb,'9')>1 then '9,' else '' end,']'),',]',']') subject_comb
+        from bks_student_testscore
+        where student_id = #{studentCode}
+        order by gmt_create desc
+        limit 0,1
+
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,12 @@
+
+spring:
+  application:
+    name: mws-bks-c # 服务名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka # 注册中心地址
+  instance:
+    instance-id: mws-bks-c:2444
+    prefer-ip-address: true

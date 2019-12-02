@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksProfessorAppointmentMapper">
+
+    <insert id="addProfessorAppointment" parameterType="List">
+        INSERT INTO bks_professor_appointment(professor_id,user_id,service_type,service_way,cost,description,status,begin_time,end_time) VALUES
+        <foreach collection="list" item="appointment" index="index" separator=",">
+            (#{appointment.professorId},#{appointment.userId},#{appointment.serviceType},#{appointment.serviceWay},#{appointment.cost},#{appointment.description},1,#{appointment.beginTime},#{appointment.endTime})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksExamAvgAchievementDao">
+
+    <select id="getList" resultType="com.benwunet.bks.model.BksExamAvgAchievement">
+        SELECT
+            grade_avg_achievement,
+            district_avg_achievement,
+            provinces_avg_achievement,
+            exam_batches,
+            school_name
+        FROM
+            `bks_exam_avg_achievement`
+        <where>
+            <if test="schoolYears != null and schoolYears != ''">
+                school_years = #{schoolYears}
+            </if>
+        </where>
+        GROUP BY exam_batches,school_name
+        ORDER BY exam_batches ASC
+    </select>
+
+    <select id="getAchievement" resultType="com.benwunet.bks.model.BksExamAvgAchievement">
+        SELECT
+            grade_persons,
+            grade_avg_achievement,
+            exam_batches,
+            school_name
+        FROM
+            `bks_exam_avg_achievement`
+        <where>
+            <if test="examName != null and examName != ''">
+                AND exam_batches = #{examName}
+            </if>
+            <if test="schoolYears != null and schoolYears != ''">
+                AND school_years = #{schoolYears}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                AND school_name = #{schoolName}
+            </if>
+        </where>
+        GROUP BY
+            exam_batches,
+            school_name,
+            school_years
+    </select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.mws.user.dao.PubSysRolemenuDao">
+
+    <delete id="deletePubSysRolemenu">
+        delete from pub_sys_rolemenu
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+        </where>
+    </delete>
+
+    <select id="findRolemenuByRoleIds" resultType="com.benwunet.mws.model.base.PubSysMenu">
+        select p.* from
+        pub_sys_menu p
+        inner join pub_sys_rolemenu rp on
+        p.menu_id = rp.menu_id
+        <where>
+            rp.role_id in
+            <foreach collection="roleIds" item="roleId" open="("
+                     separator="," close=")">
+                #{roleId}
+            </foreach>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.mws.user.dao.PubSysWechatuserDao">
+
+    <update id="updates">
+        update pub_sys_wechatuser
+        <set>
+            <if test="unionId != null and unionId != ''">
+                union_id = #{unionId},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="province != null and province != ''">
+                province = #{province},
+            </if>
+            <if test="city != null and city != ''">
+                city = #{city},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="headImg != null and headImg != ''">
+                head_img = #{headImg},
+            </if>
+            <if test="operatorId != null and operatorId != ''">
+                operator_id = #{operatorId},
+            </if>
+            <if test="operatorName != null and operatorName != ''">
+                operator_name = #{operatorName},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

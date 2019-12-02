@@ -1,0 +1,55 @@
+logging:
+  level:
+    root: info
+    com.cloud: debug
+  file: logs/${spring.application.name}.log
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://local.mysql.com:3306/mws_file?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: benwunetJ!@#
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-test-query: SELECT 1
+  rabbitmq:
+    host: local.rabbitmq.com
+    port: 5672
+    username: mws-dev
+    password: bwwl@123
+    virtual-host: /
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    servlet:
+      load-on-startup: 1
+  aop:
+    proxy-target-class: true
+  zipkin:
+    base-url: http://10.10.0.40:9411
+    enabled: true
+    sender:
+mybatis:
+  type-aliases-package: com.benwunet.mws.model.file
+  mapper-locations: classpath:/mapper/*
+  configuration:
+    mapUnderscoreToCamelCase: true
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://local.gateway.com:8080/api-o/user-me
+      prefer-token-info: false
+file:
+  local:
+    path: d:/localFile
+    prefix: /statics
+    urlPrefix: http://api.gateway.com:8080/api-f${file.local.prefix}
+  aliyun:
+    endpoint: xxx
+    accessKeyId: xxx
+    accessKeySecret: xxx
+    bucketName: xxx
+    domain: https://xxx

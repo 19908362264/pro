@@ -1,0 +1,47 @@
+@charset "utf-8";
+/**
+ * Style V1.0
+ * Author fuxiaoqing
+ * Update date @2019-03-21
+ */
+
+.bg-gray{background-color: #f0f0f0;}
+
+/*新闻详情*/
+.article-layer{position:relative;padding:50px 110px;background-color:#fff;border-radius:2px;
+	-webkit-box-shadow:0 1px 3px 0 rgba(26,26,26,.1);-moz-box-shadow:0 1px 3px 0 rgba(26,26,26,.1);box-shadow:0 1px 3px 0 rgba(26,26,26,.1);}
+.article-layer .card{box-shadow:none;}
+.article .card-hd{position:relative;padding:17px 0;min-height:40px;height:auto;}
+.article .card-hd .title{display:block;min-height:34px;line-height:34px;font-size:24px;color:#111;font-weight:700;word-wrap:break-word;word-break:break-all;text-align:justify;overflow:hidden;}
+.article .card-hd .tab{position:relative;margin-top:15px;height:24px;line-height:24px;color:#a8a8a8;}
+.article .card-hd .tab .action{position:absolute;right: 0;top: 0;}
+.article .card-hd .tab .action .bw-share{color: #25cfcf;}
+.article .card-hd .tab span{margin-left:15px;display:inline-block;}
+.article .card-hd .tab span:first-child{margin-left:0;}
+.article .card-hd .avatar{float:left;display:block;width:40px;height:40px;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;overflow:hidden;}
+.article .card-hd .avatar img{display:block;width:100%;height:100%;}
+.article .card-hd .details{margin:0 300px 0 0;min-height:40px;line-height:40px;}
+.article .card-hd .details .sub{display:inline-block;}
+.article .card-hd .details .sub .btn{margin-right:10px;padding-left:5px;padding-right:5px;height:24px;line-height:10px;font-size:12px;}
+.article .card-hd .details .sub + .name{display:inline-block;vertical-align:middle;}
+.article .card-hd .name{height:20px;line-height:20px;font-size:16px;font-weight:bold;color:#595959;white-space:nowrap;-ms-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;}
+.article .card-hd .introduce{margin-top:4px;height:16px;line-height:16px;font-size:12px;color:#898989;white-space:nowrap;-ms-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;}
+.article .right-block{position:absolute;top:20px;right:0;}
+.article .right-block .action-share{float:left;display:block;padding:3px  12px 0 0;}
+.article .right-block .action-share li{float:left;display:block;margin-right:18px;}
+.article .right-block .action-share li .icon{display:inline-block;width:28px;height:28px;background:url(../img/icon-share-QQ.png) no-repeat center center;}
+.article .right-block .action-share li .icon-weChat{background-image:url(../img/icon-share-weChat.png);}
+.article .right-block .action-share li .icon-qzone{background-image:url(../img/icon-share-Qzone.png);}
+.article .right-block .btn{width:68px;}
+.article .card-bd{padding:25px 0;border-top:1px solid #f2f2f2;}
+.article .card-bd .title{line-height:30px;font-size:20px;font-weight:bold;}
+.article .card-bd .content{margin-top:15px;line-height:30px;min-height:400px;}
+.article .card-bd .content p{margin-bottom:20px;}
+.article .card-bd .content img{display:block;margin:20px 0 45px;width:100%\9;height:100%\9;}
+.article .card-bd .content img{max-width:100%;max-height:100%;}
+.article .card-bd .content .img{margin:20px 0 45px;}
+.article .card-bd .content .img img{margin:0;}
+.article .card-bd .content .code{margin:0;text-align:center;}
+.article .card-bd .content .code img{margin:0 auto;width:150px;}
+
+

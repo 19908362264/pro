@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mws</artifactId>
+        <groupId>com.benwunet.mws</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mws-commons</artifactId>
+
+    <dependencies>
+        <!--日志实体类模块-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--基础实体类模块-->
+        <dependency>
+            <groupId>com.benwunet.mws.model</groupId>
+            <artifactId>mws-model-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <!--安全、认证依赖-->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${security-oauth2.version}</version>
+        </dependency>
+
+        <!--    微信小程序登录所需要包    -->
+        <!-- http请求所需jar包 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.11</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.7</version>
+        </dependency>
+        <!-- Jcode2Session解密所需jar包 -->
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15</artifactId>
+            <version>1.46</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.xfire</groupId>
+            <artifactId>xfire-all</artifactId>
+            <version>1.2.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <!--fialName:打成war包后的名字 ${project.artifactId}:为pom.xml中对应的名字 这个项目为miao_sha4 -->
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>utf8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

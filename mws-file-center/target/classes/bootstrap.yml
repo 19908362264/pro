@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: file-center
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: config-center
+      profile: dev
+      fail-fast: true
+server:
+  port: 4000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://local.register.com:8761/eureka/
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.int}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+swagger:
+  enabled: true
+# 分布式文件系统fastdfs配置
+fdfs:
+  # socket连接超时时长
+  soTimeout: 1500
+  # 连接tracker服务器超时时长
+  connectTimeout: 600
+  pool:
+    # 从池中借出的对象的最大数目
+    max-total: 153
+    # 获取连接时的最大等待毫秒数100
+    max-wait-millis: 102
+  # 缩略图生成参数，可选
+  thumbImage:
+    width: 150
+    height: 150
+  # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
+  trackerList:
+    - 10.10.0.40:22122
+  #
+  # 存储服务器storage_server访问地址
+  web-server-url: http://10.10.0.40/
+  spring:
+    http:
+      multipart:
+        max-file-size: 100MB # 最大支持文件大小
+        max-request-size: 100MB # 最大支持请求大小

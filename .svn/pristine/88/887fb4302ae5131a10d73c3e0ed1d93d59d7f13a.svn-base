@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksStudentTestscoreDao">
+
+
+    <!--<select id="getExamList1" resultType="com.benwunet.bks.model.dto.BksExamDTO">-->
+    <!--SELECT-->
+    <!--a.student_id,-->
+    <!--a.name,-->
+    <!--a.district,-->
+    <!--a.school,-->
+    <!--a.exam_name,-->
+    <!--a.subject_yuwen,-->
+    <!--a.subject_shuxue,-->
+    <!--a.subject_yingyu,-->
+    <!--case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,-->
+    <!--case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,-->
+    <!--CASE WHEN is_new = 1 THEN subject_dili ELSE subject_dili_new END AS subject_dili_new,-->
+    <!--CASE WHEN is_new = 1 THEN subject_shengwu ELSE subject_shengwu_new END AS subject_shengwu_new,-->
+    <!--CASE WHEN is_new = 1 THEN subject_huaxue ELSE subject_huaxue_new END AS subject_huaxue_new,-->
+    <!--CASE WHEN is_new = 1 THEN subject_zhenzhi ELSE subject_zhenzhi_new END AS subject_zhenzhi_new,-->
+    <!--subject_comb,-->
+    <!--a.gmt_create,-->
+    <!--a.gmt_modwhenied,-->
+    <!--a.operator_id,-->
+    <!--a.operator_name,-->
+    <!--a.remark-->
+    <!--FROM-->
+    <!--bks_student_testscore AS a-->
+    <!--<where>-->
+    <!--a.student_id=#{userId}-->
+    <!--<if test="examId != null and examId != ''">-->
+    <!--and a.exam_name=#{examId}-->
+    <!--</if>-->
+
+    <!--</where>-->
+
+    <!--</select>-->
+
+    <select id="getStudentExamList" resultType="com.benwunet.bks.model.BksStudentTestscore">
+        SELECT
+        a.student_id,
+        a.school_years,
+        a.`name`,
+        a.district,
+        a.school,
+        a.my_score,
+        a.exam_name,
+        a.class_name,
+        a.subject_yuwen,
+        a.subject_shuxue,
+        a.subject_yingyu,
+        case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,
+        case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,
+        CASE WHEN is_new = 0 THEN subject_dili ELSE subject_dili_new END AS subject_dili,
+        CASE WHEN is_new = 0 THEN subject_shengwu ELSE subject_shengwu_new END AS subject_shengwu,
+        CASE WHEN is_new = 0 THEN subject_huaxue ELSE subject_huaxue_new END AS subject_huaxue,
+        CASE WHEN is_new = 0 THEN subject_zhenzhi ELSE subject_zhenzhi_new END AS subject_zhenzhi,
+        subject_comb,
+        a.gmt_create,
+        a.gmt_modified,
+        a.operator_id,
+        a.operator_name,
+        a.remark
+        FROM
+        bks_student_testscore AS a
+        <where>
+
+            <if test="keyword != null and keyword != ''">
+                CONCAT( a.student_id, a.`name`) LIKE '%${keyword}%'
+            </if>
+            <if test="year != null and year != ''">
+                and a.school_years=#{year}
+            </if>
+            <if test="examName != null and examName != ''">
+                and a.exam_name=#{examName}
+            </if>
+            AND a.school=#{schoolName}
+        </where>
+        ORDER BY gmt_create Asc
+        LIMIT #{page},#{size}
+
+    </select>
+
+    <select id="getStudentExamListCount" resultType="int">
+        SELECT
+        count(1)
+        FROM
+        bks_student_testscore AS a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                CONCAT( a.student_id, a.`name`) LIKE '%${keyword}%'
+            </if>
+            <if test="year != null and year != ''">
+                and a.school_years=#{year}
+            </if>
+            <if test="examName != null and examName != ''">
+                and a.exam_name=#{examName}
+            </if>
+            AND a.school=#{schoolName}
+        </where>
+
+        ORDER BY gmt_create DESC
+    </select>
+
+
+    <select id="getStudentExamRankList" resultType="com.benwunet.bks.model.BksStudentTestscore">
+        SELECT
+        a.student_id,
+        a.school_years,
+        a.`name`,
+        a.district,
+        a.school,
+        a.exam_name,
+        a.class_name,
+        a.my_score,
+        a.subject_yuwen,
+        a.subject_shuxue,
+        a.subject_yingyu,
+        case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,
+        case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,
+        CASE WHEN is_new = 0 THEN subject_dili ELSE subject_dili_new END AS subject_dili,
+        CASE WHEN is_new = 0 THEN subject_shengwu ELSE subject_shengwu_new END AS subject_shengwu,
+        CASE WHEN is_new = 0 THEN subject_huaxue ELSE subject_huaxue_new END AS subject_huaxue,
+        CASE WHEN is_new = 0 THEN subject_zhenzhi ELSE subject_zhenzhi_new END AS subject_zhenzhi,
+        subject_comb
+        FROM
+        bks_student_testscore AS a
+        <where>
+            a.school=#{schoolName}
+            <if test="examName != null and examName != ''">
+                and a.exam_name=#{examName}
+            </if>
+            <if test="year != null and year != ''">
+                and a.school_years=#{year}
+            </if>
+
+        </where>
+        <choose>
+            <when test="courseId==null||courseId == ''">
+                order by (a.subject_yuwen+a.subject_shuxue+
+                a.subject_yingyu+subject_wuli+subject_lishi+subject_dili+subject_huaxue+subject_shengwu+subject_zhenzhi)
+                desc
+            </when>
+            <when test="courseId==1001">
+                order by subject_yuwen desc
+            </when>
+            <when test="courseId==1002 ">
+                order by subject_shuxue desc
+            </when>
+            <when test="courseId==1003 ">
+                order by subject_yingyu desc
+            </when>
+            <when test="courseId==1004 ">
+                order by subject_shengwu desc
+            </when>
+            <when test="courseId==1005">
+                order by subject_dili desc
+            </when>
+            <when test="courseId==1006">
+                order by subject_zhenzhi desc
+            </when>
+            <when test="courseId==1007">
+                order by subject_huaxue desc
+            </when>
+            <when test="courseId==1008">
+                order by subject_wuli desc
+            </when>
+            <when test="courseId==1009">
+                order by subject_lishi desc
+            </when>
+        </choose>
+        LIMIT #{page},#{size}
+
+    </select>
+
+    <select id="getStudentExamRankListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        bks_student_testscore AS a
+        <where>
+            a.school=#{schoolName}
+            <if test="examName != null and examName != ''">
+                and a.exam_name=#{examName}
+            </if>
+            <if test="schoolYear != null and schoolYear != ''">
+                and a.school_years=#{schoolYear}
+            </if>
+        </where>
+        <choose>
+            <when test="courseId==null||courseId == ''">
+                order by my_score desc
+            </when>
+            <when test="courseId==1001">
+                order by subject_yuwen desc
+            </when>
+            <when test="courseId==1002 ">
+                order by subject_shuxue desc
+            </when>
+            <when test="courseId==1003 ">
+                order by subject_yingyu desc
+            </when>
+            <when test="courseId==1004 ">
+                order by subject_shengwu desc
+            </when>
+            <when test="courseId==1005">
+                order by subject_dili desc
+            </when>
+            <when test="courseId==1006">
+                order by subject_zhenzhi desc
+            </when>
+            <when test="courseId==1007">
+                order by subject_huaxue desc
+            </when>
+            <when test="courseId==1008">
+                order by subject_wuli desc
+            </when>
+            <when test="courseId==1009">
+                order by subject_lishi desc
+            </when>
+        </choose>
+    </select>
+
+
+    <select id="getExamAnalyse" resultType="com.benwunet.bks.model.dto.BksExamDTO">
+        SELECT
+        a.student_id,
+        a.name,
+        a.district,
+        a.school,
+        a.exam_name,
+        a.subject_yuwen,
+        a.subject_shuxue,
+        a.subject_yingyu,
+        case when INSTR(subject_comb,'7')>0 then subject_wuli else null end subject_wuli,
+        case when INSTR(subject_comb,'5')>0 then subject_lishi else null end subject_lishi,
+        case when INSTR(subject_comb,'6')>0 then subject_dili else null end subject_dili,
+        case when INSTR(subject_comb,'8')>0 then subject_huaxue else null end subject_huaxue,
+        case when INSTR(subject_comb,'9')>0 then subject_shengwu else null end subject_shengwu,
+        case when INSTR(subject_comb,'4')>0 then subject_zhenzhi else null end subject_zhenzhi,
+        subject_comb,
+        a.gmt_create,
+        a.gmt_modwhenied,
+        a.operator_id,
+        a.operator_name,
+        a.remark
+        FROM
+        bks_student_testscore  AS a
+        where
+            a.student_id=#{userId}
+    </select>
+    <select id="getStudetnScore" resultType="com.benwunet.bks.model.BksStudentTestscore">
+        select REPLACE(CONCAT('[',case when INSTR(subject_comb,'7')>1 then '7,' else '' end,case when INSTR(subject_comb,'5')>1 then '5,' else '' end,case when INSTR(subject_comb,'4')>1 then '4,' else '' end,case when INSTR(subject_comb,'6')>1 then '6,' else '' end,case when INSTR(subject_comb,'8')>1 then '8,' else '' end,case when INSTR(subject_comb,'9')>1 then '9,' else '' end,']'),',]',']') subject_comb
+        from bks_student_testscore
+        where student_id = #{studentCode}
+        order by gmt_create desc
+        limit 0,1
+
+
+    </select>
+
+
+    <select id="getStudentTotalRankList" resultType="com.benwunet.bks.entity.homepage.ScoreRanking">
+        SELECT DISTINCT
+        IFNULL( my_score, 0.0 ) AS score,
+        `name` AS studentName,
+        grade_ranking AS ranking,
+        grade_ranking_chg AS changes,
+        exam_batches
+        FROM
+        bks_exam_ranking
+        <where>
+            <if test="examName != null and examName != ''">
+                AND exam_batches = #{examName}
+            </if>
+            <if test="schoolYears != null and schoolYears != ''">
+                AND school_years = #{schoolYears}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                AND school_name = #{schoolName}
+            </if>
+        </where>
+        ORDER BY grade_ranking ASC
+        LIMIT 0,20
+
+    </select>
+
+
+    <select id="getTestScores" resultType="com.benwunet.bks.model.BksStudentTestscore">
+        SELECT
+        student_id,
+        `name`,
+        district,
+        school,
+        exam_name,
+        subject_yuwen,
+        subject_shuxue,
+        subject_yingyu,
+        CASE WHEN is_new = 0 THEN subject_dili ELSE subject_dili_new END AS subject_dili_new,
+        CASE WHEN is_new = 0 THEN subject_shengwu ELSE subject_shengwu_new END AS subject_shengwu_new,
+        CASE WHEN is_new = 0 THEN subject_huaxue ELSE subject_huaxue_new END AS subject_huaxue_new,
+        CASE WHEN is_new = 0 THEN subject_zhenzhi ELSE subject_zhenzhi_new END AS subject_zhenzhi_new,
+        subject_wuli,
+        subject_lishi
+        FROM
+        bks_student_testscore
+        <where>
+            <if test="examName != null and examName != ''">
+                AND exam_name = #{examName}
+            </if>
+            <if test="schoolYears != null and schoolYears != ''">
+                AND school_years = #{schoolYears}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                AND school = #{schoolName}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="getAvgAchievement" resultType="com.benwunet.bks.model.BksExamAvgAchievement">
+        SELECT
+        grade_avg_achievement,
+        grade_avg_achievement_yw,
+        grade_avg_achievement_sx,
+        grade_avg_achievement_yy,
+        max( grade_avg_achievement_hx ) AS grade_avg_achievement_hx,
+        max( grade_avg_achievement_wl ) AS grade_avg_achievement_wl,
+        max( grade_avg_achievement_sw ) AS grade_avg_achievement_sw,
+        max( grade_avg_achievement_ls ) AS grade_avg_achievement_ls,
+        max( grade_avg_achievement_zz ) AS grade_avg_achievement_zz,
+        max( grade_avg_achievement_dl ) AS grade_avg_achievement_dl,
+        grade_persons,
+        grade_person_yw,
+        grade_person_sx,
+        grade_person_yy,
+        max( grade_person_wl ) AS grade_person_wl,
+        max( grade_person_sw ) AS grade_person_sw,
+        max( grade_person_hx ) AS grade_person_hx,
+        max( grade_person_dl ) AS grade_person_dl,
+        max( grade_person_ls ) AS grade_person_ls,
+        max( grade_person_zz ) AS grade_person_zz,
+        grade_max_achievement,
+        grade_max_achievement_yw,
+        grade_max_achievement_sx,
+        grade_max_achievement_yy,
+        max( grade_max_achievement_wl ) AS grade_max_achievement_wl,
+        max( grade_max_achievement_sw ) AS grade_max_achievement_sw,
+        max( grade_max_achievement_hx ) AS grade_max_achievement_hx,
+        max( grade_max_achievement_dl ) AS grade_max_achievement_dl,
+        max( grade_max_achievement_ls ) AS grade_max_achievement_ls,
+        max( grade_max_achievement_zz ) AS grade_max_achievement_zz,
+        grade_min_achievement,
+        grade_min_achievement_yw,
+        grade_min_achievement_sx,
+        grade_min_achievement_yy,
+        max( grade_min_achievement_wl ) AS grade_min_achievement_wl,
+        max( grade_min_achievement_sw ) AS grade_min_achievement_sw,
+        max( grade_min_achievement_hx ) AS grade_min_achievement_hx,
+        max( grade_min_achievement_dl ) AS grade_min_achievement_dl,
+        max( grade_min_achievement_ls ) AS grade_min_achievement_ls,
+        max( grade_min_achievement_zz ) AS grade_min_achievement_zz
+        FROM
+        `bks_exam_avg_achievement`
+        <where>
+            <if test="examName != null and examName != ''">
+                AND exam_batches = #{examName}
+            </if>
+            <if test="schoolYears != null and schoolYears != ''">
+                AND school_years = #{schoolYears}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                AND school_name = #{schoolName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getScoreRangeData" resultType="com.benwunet.bks.model.BksGradeSubsection">
+        SELECT DISTINCT
+        t0.section_type,
+        t1.school_years,
+        t1.exam_name,
+        t0.`subject`,
+        t0.score_end AS section_score,
+        IFNULL(t1.section_nums,0) AS section_nums ,
+        IFNULL(t1.section_accumulation,0) AS section_accumulation,
+        t1.school_name
+        FROM
+        bks_grade_section t0
+        LEFT JOIN bks_grade_subsection t1 ON t0.section_type = t1.section_type
+        AND t0.`subject` = t1.`subject`
+        AND t0.score_end = t1.section_score
+        <if test="examName != null and examName != ''">
+            AND t1.exam_name = #{examName}
+        </if>
+        <if test="schoolYears != null and schoolYears != ''">
+            AND t1.school_years = #{schoolYears}
+        </if>
+        <if test="schoolName != null and schoolName != ''">
+            AND t1.school_name = #{schoolName}
+        </if>
+        <where>
+            t0.`subject` = 0
+            <if test="sectionType != null and sectionType != ''">
+                AND t0.section_type = #{sectionType}
+            </if>
+        </where>
+        GROUP BY
+        t0.section_type,
+        school_years,
+        exam_name,
+        t0.`subject`,
+        t0.score_end,
+        school_name
+        ORDER BY
+        t0.score_begin DESC
+    </select>
+
+    <select id="getSubsection" resultType="com.benwunet.bks.model.BksGradeSubsection">
+        SELECT DISTINCT
+        t0.section_type,
+        t1.school_years,
+        t1.exam_name,
+        t0.`subject`,
+        t0.score_end AS section_score,
+        IFNULL(t1.section_nums,0) AS section_nums ,
+        IFNULL(t1.section_accumulation,0) AS section_accumulation,
+        t1.school_name
+        FROM
+        bks_grade_section t0
+        LEFT JOIN bks_grade_subsection t1 ON t0.section_type = t1.section_type
+        AND t0.`subject` = t1.`subject`
+        AND t0.score_end = t1.section_score
+        <if test="examName != null and examName != ''">
+            AND t1.exam_name = #{examName}
+        </if>
+        <if test="schoolYears != null and schoolYears != ''">
+            AND t1.school_years = #{schoolYears}
+        </if>
+        <if test="schoolName != null and schoolName != ''">
+            AND t1.school_name = #{schoolName}
+        </if>
+        <where>
+            t0.`subject` in
+            <foreach collection="subjects" open="(" item="subject" close=")" separator=",">
+                #{subject}
+            </foreach>
+            <if test="sectionType != null and sectionType != ''">
+                AND t0.section_type = #{sectionType}
+            </if>
+        </where>
+        GROUP BY
+        t0.section_type,
+        school_years,
+        exam_name,
+        t0.`subject`,
+        t0.score_end,
+        school_name
+        ORDER BY
+        t0.score_begin DESC
+    </select>
+
+    <select id="getUpload" resultType="com.benwunet.bks.model.BksExamUpload">
+        SELECT
+            exam_name,
+            school_years
+        FROM
+            `bks_exam_upload`
+        where school_name = #{schoolName}
+        and status = 1
+        ORDER BY
+            gmt_modified DESC
+    </select>
+
+</mapper>

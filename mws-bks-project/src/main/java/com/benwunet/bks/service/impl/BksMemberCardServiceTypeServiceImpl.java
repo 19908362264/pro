@@ -1,0 +1,20 @@
+package com.benwunet.bks.service.impl;
+
+import com.benwunet.bks.dao.BksMemberCardServiceTypeMapper;
+import com.benwunet.bks.model.BksMemberCardServiceType;
+import com.benwunet.bks.service.BksMemberCardServiceTypeService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * 服务类别表 服务实现类
+ * </p>
+ *
+ * @author zhoux
+ * @since 2019-11-15
+ */
+@Service
+public class BksMemberCardServiceTypeServiceImpl extends ServiceImpl<BksMemberCardServiceTypeMapper, BksMemberCardServiceType> implements BksMemberCardServiceTypeService {
+
+}

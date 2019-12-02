@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksSubjectCombDao">
+
+    <select id="getYear" resultType="String">
+        SELECT
+        school_year
+        FROM `bks_subject_comb`
+        WHERE district_name = #{districtName} AND school_name = #{schoolName}
+        ORDER BY school_year DESC
+        LIMIT 0,1
+    </select>
+
+    <select id="getDistrictSubjectCombs" resultType="com.benwunet.bks.model.dto.BksProvinceSubjectCombDTO">
+        SELECT
+        REPLACE(CONCAT('[',case when INSTR(subject_comb,'7')>1 then '7,' else '' end,case when INSTR(subject_comb,'5')>1 then '5,' else '' end,case when INSTR(subject_comb,'4')>1 then '4,' else '' end,case when INSTR(subject_comb,'6')>1 then '6,' else '' end,case when INSTR(subject_comb,'8')>1 then '8,' else '' end,case when INSTR(subject_comb,'9')>1 then '9,' else '' end,']'),',]',']') subject_comb,
+        SUM(IFNULL(total_num,0)) AS total,
+        recruit
+        FROM `bks_subject_comb`
+        WHERE district_name = #{districtName} AND school_year = #{year}
+        GROUP BY subject_comb
+        order by subject_comb asc
+    </select>
+
+    <select id="getProvinceSubjectCombs" resultType="com.benwunet.bks.model.dto.BksProvinceSubjectCombDTO">
+        SELECT
+       REPLACE(CONCAT('[',case when INSTR(subject_comb,'7')>1 then '7,' else '' end,case when INSTR(subject_comb,'5')>1 then '5,' else '' end,case when INSTR(subject_comb,'4')>1 then '4,' else '' end,case when INSTR(subject_comb,'6')>1 then '6,' else '' end,case when INSTR(subject_comb,'8')>1 then '8,' else '' end,case when INSTR(subject_comb,'9')>1 then '9,' else '' end,']'),',]',']') subject_comb,
+        SUM(IFNULL(total_num,0)) AS total,
+        recruit
+        FROM `bks_subject_comb`
+        WHERE school_year = #{year}
+        GROUP BY subject_comb
+        order by subject_comb asc
+    </select>
+    <select id="getSchools" resultType="com.benwunet.bks.model.BksSubjectComb">
+        SELECT       REPLACE(CONCAT('[',case when INSTR(subject_comb,'7')>1 then '7,' else '' end,case when INSTR(subject_comb,'5')>1 then '5,' else '' end,case when INSTR(subject_comb,'4')>1 then '4,' else '' end,case when INSTR(subject_comb,'6')>1 then '6,' else '' end,case when INSTR(subject_comb,'8')>1 then '8,' else '' end,case when INSTR(subject_comb,'9')>1 then '9,' else '' end,']'),',]',']') subject_comb,
+         SUM(IFNULL(total_num,0)) AS total_num,
+         recruit
+        FROM `bks_subject_comb`
+        WHERE
+        school_name = #{schoolName}
+        AND
+        district_name = #{districtName}
+        AND
+        school_year = #{year}
+        GROUP BY subject_comb
+        ORDER BY
+        subject_comb asc
+
+
+    </select>
+
+
+</mapper>

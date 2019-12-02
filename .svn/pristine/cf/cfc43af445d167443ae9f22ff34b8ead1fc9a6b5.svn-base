@@ -1,0 +1,57 @@
+package com.benwunet.bks.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.benwunet.bks.dao.BksMemberMapper;
+import com.benwunet.bks.feign.UserClient;
+import com.benwunet.bks.model.BksMember;
+import com.benwunet.bks.model.BksUser;
+import com.benwunet.bks.service.BksMemberService;
+import com.benwunet.bks.service.BksUserService;
+import com.benwunet.mws.model.base.LoginPubSysUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+/**
+ * <p>
+ * 会员表 服务实现类
+ * </p>
+ *
+ * @author zhoux
+ * @since 2019-11-15
+ */
+@Service
+public class BksMemberServiceImpl extends ServiceImpl<BksMemberMapper, BksMember> implements BksMemberService {
+
+    @Autowired
+    private UserClient userClient;
+
+    @Autowired
+    private BksUserService userService;
+
+    @Transactional
+    @Override
+    public void openMember(String userId) {
+        //1.新增会员
+        LoginPubSysUser loginPubSysUser = userClient.getLoginPubSysUser();
+        LocalDateTime now = LocalDateTime.now();
+        BksMember bksMember = new BksMember()
+                .setPrice(new BigDecimal(299))
+                .setOpeningTime(now)
+                .setValidTime(12)
+                .setGmtCreate(now)
+                .setOperatorId(loginPubSysUser.getUserId())
+                .setOperatorName(loginPubSysUser.getUsername());
+        this.save(bksMember);
+        //2.为user添加会员id
+        userService.update(new BksUser().setMemberId(bksMember.getId()), new QueryWrapper<BksUser>().eq("user_id",userId));
+        //3.添加会员权限
+
+        //4.添加会员卡券
+
+    }
+}

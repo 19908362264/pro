@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksSchoolScoreDao">
+
+
+   <select id="getVoluntaryForecasting" resultType="com.benwunet.bks.model.dto.BksSchoolScoreDTO">
+       SELECT
+       DISTINCT
+       school_score.school_id,
+       school.school_name,
+       campus.campus_name,
+       colleges.colleges_name,
+       province.province_name,
+       school_score.average AS avg,
+       school_score.`year`,
+       school_score.min,
+       school_score.max,
+       school_score.score AS province_score,
+       school_score.batch,
+       school_score.local_batch_name
+       FROM
+       bks_school_score school_score
+       INNER JOIN bks_school school ON school_score.school_id = school.school_id
+       INNER JOIN bks_campus campus ON school.campus_id = campus.campus_id
+       INNER JOIN bks_colleges colleges ON school.colleges_id = colleges.colleges_id
+       INNER JOIN bks_province province ON school.province_id = province.province_id
+   <where>
+       school_score.MAX &lt;&gt; '--'
+       AND school_score.MIN &lt;&gt;  '--'
+       AND school_score.average &lt;&gt;  '--'
+       AND school_score.MIN &lt;  #{score}
+       AND school_score.MIN +'200' &gt; #{score} AND
+       school_score.province = #{cityId}
+       <if test="schoolProvinceId != null and schoolProvinceId != ''">
+           AND school.province_id = #{schoolProvinceId}
+       </if>
+       AND school_score.type = #{type}
+       AND YEAR IN ( '2018', '2017' )
+   </where>
+       GROUP BY
+       school.school_name
+       -- \tAND school_score.batch IN ( '7', '10' )
+       ORDER BY
+       school_score.MIN DESC ,
+       school_score.`year` DESC
+       LIMIT #{page},
+       10
+   </select>
+
+
+    <select id="getVoluntaryForecastingCount" resultType="integer">
+        SELECT
+        count(DISTINCT school.school_name)
+        FROM
+        bks_school_score school_score
+        INNER JOIN bks_school school ON school_score.school_id = school.school_id
+        INNER JOIN bks_campus campus ON school.campus_id = campus.campus_id
+        INNER JOIN bks_colleges colleges ON school.colleges_id = colleges.colleges_id
+        INNER JOIN bks_province province ON school.province_id = province.province_id
+        <where>
+            school_score.MAX &lt;&gt; '--'
+            AND school_score.MIN &lt;&gt;  '--'
+            AND school_score.average &lt;&gt;  '--'
+            AND school_score.MIN &lt;  #{score}
+            AND school_score.MIN +'200' &gt; #{score} AND
+            school_score.province = #{cityId}
+            <if test="schoolProvinceId != null and schoolProvinceId != ''">
+                AND school.province_id = #{schoolProvinceId}
+            </if>
+            AND school_score.type = #{type}
+            AND YEAR IN ( '2018', '2017' )
+        </where>
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,573 @@
+package com.benwunet.bks.controller.consult;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.benwunet.bks.controller.base.BaseController;
+import com.benwunet.bks.model.*;
+import com.benwunet.bks.model.vo.MyConcernVO;
+import com.benwunet.bks.service.*;
+import com.benwunet.bks.util.DateUtils;
+import com.benwunet.mws.model.result.ResponseResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * @param
+ * @author zuoli
+ * @return
+ * @date 2019/8/22 15:08
+ */
+@RestController
+@RequestMapping
+@Api(value = "学生端个人中心", tags = "学生端个人中心")
+public class MyController extends BaseController {
+
+    @Autowired
+    private BksProfessorAppointmentService appointmentService;
+
+    @Autowired
+    private BksQuestionAnswerService questionAnswerService;
+
+    @Autowired
+    private BksQuestionService questionService;
+
+    @Autowired
+    private BksProfessorTimeService professorTimeService;
+
+    @Autowired
+    private BksUserSchoolMajorService majorService;
+
+    @Autowired
+    private BksProfessorService professorService;
+
+    @Autowired
+    private BksQuestionOrderService orderService;
+
+    @Autowired
+    private BksUserService userService;
+
+    @Autowired
+    private BksSchoolService bksSchoolService;
+
+    @Autowired
+    private BksMajorService bksMajorService;
+
+    /**
+     * 我的提问代号
+     */
+    private static final Integer KEY1 = 1;
+    /**
+     * 悬赏解答
+     */
+    private static final Integer KEY2 = 2;
+    /**
+     * 专家解答
+     */
+    private static final Integer KEY3 = 3;
+
+    /**
+     * @param userId
+     * @param page
+     * @param size
+     * @param status
+     * @return
+     */
+    @GetMapping("/myAppointment/{userId}")
+    @ApiOperation(value = "备考生小程序我的预约服务记录", notes = "备考生我的预约服务记录")
+    public ResponseResult myAppointment(@ApiParam(value = "用户id", required = true) @PathVariable("userId") String userId,
+                                        @ApiParam(value = "当前页", required = true) Integer page,
+                                        @ApiParam(value = "每页数量", required = true) Integer size,
+                                        @ApiParam(value = "1:待付款2:待咨询3:进行中4:已完成", required = false) String status) {
+
+        QueryWrapper<BksProfessorAppointment> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.eq("user_id", userId);
+
+        queryWrapper.orderByDesc("gmt_create");
+
+        if (status != null && !"".equals(status)) {
+
+            queryWrapper.eq("status", status);
+        }
+        int total = appointmentService.count(queryWrapper);
+
+        if (total <= 0) {
+
+            return ResponseResult.app(1, 1, "数据为空", "");
+
+        }
+        Page<BksProfessorAppointment> appointmentPage = new Page<>(page, size, total);
+
+        IPage<BksProfessorAppointment> appointmentIPage = appointmentService.page(appointmentPage, queryWrapper);
+
+        List<Map<String, Object>> collect = appointmentIPage.getRecords().stream().map(x -> {
+            Map<String, Object> map = new HashMap<>();
+            List<Map<String, Object>> mapList = new ArrayList<>();
+            QueryWrapper<BksUser> userQueryWrapper = new QueryWrapper<>();
+            userQueryWrapper.eq("user_id", x.getProfessorId());
+            BksUser one = userService.getOne(userQueryWrapper);
+            map.put("headImg", one.getHeadImg());
+            map.put("userStatus", one.getStatus());
+            map.put("type", x.getServiceType());
+            map.put("way", x.getServiceWay());
+            map.put("professorId", x.getProfessorId());
+            map.put("professorName", x.getProfessorName());
+            map.put("description", x.getDescription());
+            map.put("money", x.getCost());
+            map.put("status", x.getStatus());
+            map.put("appointmentId", x.getId());
+            QueryWrapper<BksProfessorTime> query = new QueryWrapper<>();
+            query.eq("appointment_id", x.getId());
+            List<Map<String, Object>> collect1 = professorTimeService.list(query).stream().map(o -> {
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("date", o.getDate());
+                map1.put("type", o.getType());
+                map1.put("end", o.getTimeType());
+                return map1;
+            }).collect(Collectors.toList());
+
+            map.put("time", collect1);
+            return map;
+        }).collect(Collectors.toList());
+
+        return ResponseResult.page(0, "", Long.valueOf(total), collect);
+    }
+
+
+    @GetMapping("/myAnswer/{userId}")
+    @ApiOperation(value = "备考生小程序我的回答", notes = "备考生我的回答")
+    public ResponseResult myAnswer(@ApiParam(value = "专家id", required = true) @PathVariable("userId") String userId,
+                                   @ApiParam(value = "当前页", required = true) Integer page,
+                                   @ApiParam(value = "每页数量", required = true) Integer size,
+                                   @ApiParam(value = "0:待处理，1:已采纳，2:未采纳", required = false) String status) {
+        QueryWrapper<BksQuestionAnswer> answerQueryWrapper = new QueryWrapper<>();
+        answerQueryWrapper.eq("user_id", userId);
+        answerQueryWrapper.orderByDesc("gmt_create");
+        if (status != null && !"".equals(status)) {
+            answerQueryWrapper.eq("accept_type", status);
+        }
+        int total = questionAnswerService.count(answerQueryWrapper);
+        if (total <= 0) {
+            return ResponseResult.app(1, 1, "数据为空", "");
+        }
+        Page<BksQuestionAnswer> answerPage = new Page<>(page, size, total);
+        IPage<BksQuestionAnswer> questionAnswerIPage = questionAnswerService.page(answerPage, answerQueryWrapper);
+        //      List<Map<String, Object>> mapList = new ArrayList<>();
+        List<Map<String, Object>> collect = questionAnswerIPage.getRecords().stream().map(x -> {
+            Map<String, Object> map = new HashMap<>();
+            QueryWrapper<BksQuestion> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id", x.getQuestionId());
+            BksQuestion one = questionService.getOne(queryWrapper);
+            map.put("questionId", one.getId());
+            map.put("title", one.getTitle());
+            map.put("cost", one.getMoney() == 0 ? "免费回答" : one.getMoney());
+            map.put("type", one.getTypeName());
+            map.put("questionUser", one.getUserName());
+            map.put("status", x.getAcceptType());
+            map.put("time", DateUtils.dateToStrLong(x.getGmtCreate()));
+            QueryWrapper<BksQuestionAnswer> queryWrapper1 = new QueryWrapper<>();
+            queryWrapper1.eq("question_id", one.getId());
+            queryWrapper1.isNotNull("user_id");
+            int count = questionAnswerService.count(queryWrapper1);
+            map.put("total", count);
+
+            return map;
+        }).collect(Collectors.toList());
+
+        return ResponseResult.page(0, "", Long.valueOf(total), collect);
+    }
+
+
+    /**
+     * @param userId
+     * @param page
+     * @param size
+     * @param key
+     * @param status
+     * @param payStatus
+     * @return
+     */
+    @GetMapping("/myQuestion/{userId}")
+    @ApiOperation(value = "备考生小程序我的提问，悬赏解答，专家解答", notes = "备考生小程序我的提问，悬赏解答，专家解答")
+    public ResponseResult myQuestion(@ApiParam(value = "用户id", required = true) @PathVariable("userId") String userId,
+                                     @ApiParam(value = "当前页", required = true) Integer page,
+                                     @ApiParam(value = "每页数量", required = true) Integer size,
+                                     @ApiParam(value = "分类：1:我的提问，2:悬赏解答,3:专家解答", required = true) Integer key,
+                                     @ApiParam(value = "状态 0-未解决 1-已解决  2-进行中（指定给专家时，专家有回答，但是未被采纳）", required = false) String status,
+                                     @ApiParam(value = "状态 0:待付款，1:待解答，2:进行中，3:已完成", required = false) String payStatus) {
+
+        QueryWrapper<BksQuestion> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        queryWrapper.orderByDesc("gmt_create");
+        if (key.equals(KEY1)) {
+            if (status != null && !"".equals(status)) {
+                queryWrapper.eq("status", status);
+            }
+        }
+        if (key.equals(KEY2)) {
+            queryWrapper.eq("manner", 1);
+            if (status != null && !"".equals(status)) {
+                queryWrapper.eq("status", status);
+            }
+        }
+        if (key.equals(KEY3)) {
+            queryWrapper.eq("manner", 2);
+            if (payStatus != null && !"".equals(payStatus)) {
+                queryWrapper.eq("pay_status", payStatus);
+            }
+        }
+        int total = questionService.count(queryWrapper);
+        if (total <= 0) {
+            return ResponseResult.app(1, 1, "数据为空", "");
+
+        }
+        Page<BksQuestion> bksQuestionPage = new Page<>(page, size, total);
+        IPage<BksQuestion> questionIPage = questionService.page(bksQuestionPage, queryWrapper);
+        List<Map<String, Object>> collect = questionIPage.getRecords().stream().map(x -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("title", x.getTitle());
+            QueryWrapper<BksQuestionAnswer> query = new QueryWrapper<>();
+            query.eq("question_id", x.getId());
+            query.orderByAsc("gmt_create");
+            int count = questionAnswerService.count(query);
+            map.put("total", count);
+            map.put("questionId", x.getId());
+            map.put("status", x.getStatus());
+            map.put("questionTime", DateUtils.dateToStr(x.getGmtCreate()));
+            map.put("money", x.getMoney());
+            map.put("answerTime", questionAnswerService.list(query).size() == 0 ? "" : DateUtils.dateToStr(questionAnswerService.list(query).get(0).getGmtCreate()));
+            if (key.equals(KEY3)) {
+                QueryWrapper<BksUser> userQueryWrapper = new QueryWrapper<>();
+                userQueryWrapper.eq("user_id", x.getProfessorId());
+                BksUser one = userService.getOne(userQueryWrapper);
+                map.put("professorId", x.getProfessorId());
+                //map.put("professorName",x.getProfessorName());
+                map.put("headImg", one.getHeadImg());
+                map.put("userStatus", one.getStatus());
+                map.put("payStatus", x.getPayStatus());
+                map.put("professorName", questionAnswerService.list(query).size() == 0 ? "" : questionAnswerService.list(query).get(0).getUserName());
+
+            }
+            return map;
+        }).collect(Collectors.toList());
+
+        return ResponseResult.page(0, "", Long.valueOf(total), collect);
+
+    }
+
+    /**
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/myConcernProfessor/{userId}")
+    @ApiOperation(value = "备考生小程序我关注的专家", notes = "备考生我关注的专家")
+    public ResponseResult myConcernProfessor(@ApiParam(value = "用户id", required = true) @PathVariable("userId") String userId,
+                                             @ApiParam(value = "当前页", required = true) Integer page,
+                                             @ApiParam(value = "每页数量", required = true) Integer size) {
+
+        QueryWrapper<BksUserSchoolMajor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        queryWrapper.isNotNull("professor_id");
+        int total = majorService.count(queryWrapper);
+        Page<BksUserSchoolMajor> userSchoolMajorPage = new Page<>(page, size, total);
+        IPage<BksUserSchoolMajor> page1 = majorService.page(userSchoolMajorPage, queryWrapper);
+
+        if (CollectionUtils.isEmpty(page1.getRecords())) {
+            return ResponseResult.app(0, 0, "关注的专家不存在", "");
+        }
+
+        List<Map<String, Object>> collect = page1.getRecords().stream().map(x -> {
+            //  String id = x.getProfessorId();
+            Map<String, Object> data = new HashMap<>();
+            QueryWrapper<BksProfessor> query = new QueryWrapper<>();
+            query.eq("user_id", x.getProfessorId());
+            //query.eq("status", 1);
+            BksProfessor one = professorService.getOne(query);
+            data.put("name", one == null ? "" : one.getProfessorName());
+            data.put("headImg", one != null ? one.getHeadImg() : null);
+            data.put("status", one != null ? one.getStatus() : null);
+            data.put("type", one != null ? one.getProfessorType() : null);
+            data.put("filed", one != null ? one.getSkilledField() : null);
+            data.put("id", one != null ? one.getUserId() : null);
+            data.put("introduction", one != null ? one.getIntroduction() : null);
+            return data;
+        }).collect(Collectors.toList());
+
+        return ResponseResult.page(0, "", Long.valueOf(total), collect);
+
+    }
+
+    @PostMapping("/myConcernSchool/{userId}")
+    @ApiOperation(value = "备考生小程序我关注的高校", notes = "备考生小程序我关注的高校")
+    public ResponseResult myConcernSchool(@RequestBody MyConcernVO myConcernVO) {
+        QueryWrapper<BksUserSchoolMajor> bksUserSchoolMajorQueryWrapper = new QueryWrapper<>();
+        bksUserSchoolMajorQueryWrapper.eq("user_id", myConcernVO.getUserId());
+        bksUserSchoolMajorQueryWrapper.isNotNull("school_id");
+        int count = majorService.count(bksUserSchoolMajorQueryWrapper);
+        bksUserSchoolMajorQueryWrapper.last(" limit " + (myConcernVO.getPageCurrent() - 1) + "," + myConcernVO.getPageSize());
+        List<BksUserSchoolMajor> BksUserSchoolMajorList = majorService.list(bksUserSchoolMajorQueryWrapper);
+        List<BksSchool> bksSchoolList = new ArrayList<>();
+        BksUserSchoolMajorList.forEach(x -> {
+            QueryWrapper<BksSchool> bksSchoolQueryWrapper = new QueryWrapper<>();
+            bksSchoolQueryWrapper.eq("school_id", x.getSchoolId());
+            BksSchool bksSchool = bksSchoolService.getOne(bksSchoolQueryWrapper);
+            bksSchoolList.add(bksSchool);
+        });
+        return success(count, bksSchoolList);
+    }
+
+    @PostMapping("/myConcernMajor/{userId}")
+    @ApiOperation(value = "备考生小程序我关注的专业", notes = "备考生我关注的专业")
+    public ResponseResult myConcernMajor(@RequestBody MyConcernVO myConcernVO) {
+        QueryWrapper<BksUserSchoolMajor> bksUserSchoolMajorQueryWrapper = new QueryWrapper<>();
+        bksUserSchoolMajorQueryWrapper.eq("user_id", myConcernVO.getUserId());
+        bksUserSchoolMajorQueryWrapper.isNotNull("major_id");
+        int count = majorService.count(bksUserSchoolMajorQueryWrapper);
+        bksUserSchoolMajorQueryWrapper.last(" limit " + (myConcernVO.getPageCurrent() - 1) + "," + myConcernVO.getPageSize());
+        List<BksUserSchoolMajor> BksUserSchoolMajorList = majorService.list(bksUserSchoolMajorQueryWrapper);
+        List<BksMajor> bksMajorList = new ArrayList<>();
+        BksUserSchoolMajorList.forEach(x -> {
+            QueryWrapper<BksMajor> bksSchoolQueryWrapper = new QueryWrapper<>();
+            bksSchoolQueryWrapper.eq("major_id", x.getMajorId());
+            BksMajor bksMajor = bksMajorService.getOne(bksSchoolQueryWrapper);
+            bksMajorList.add(bksMajor);
+        });
+        return success(count, bksMajorList);
+    }
+
+    @PostMapping("/cancelMyConcernMajor/{userId}")
+    @ApiOperation(value = "取消收藏", notes = "取消收藏")
+    public ResponseResult cancelMyConcernMajor(@RequestBody MyConcernVO myConcernVO) {
+        QueryWrapper<BksUserSchoolMajor> bksUserSchoolMajorQueryWrapper = new QueryWrapper<>();
+        bksUserSchoolMajorQueryWrapper.eq("user_id", myConcernVO.getUserId());
+        if (!ObjectUtils.isEmpty(myConcernVO.getSchoolId())) {
+            bksUserSchoolMajorQueryWrapper.eq("school_id", myConcernVO.getSchoolId());
+        }
+        if (!ObjectUtils.isEmpty(myConcernVO.getMajorId())) {
+            bksUserSchoolMajorQueryWrapper.eq("major_id", myConcernVO.getMajorId());
+        }
+        if (!ObjectUtils.isEmpty(myConcernVO.getProfessorId())) {
+            bksUserSchoolMajorQueryWrapper.eq("professor_id", myConcernVO.getProfessorId());
+        }
+        majorService.remove(bksUserSchoolMajorQueryWrapper);
+        return success();
+    }
+
+    @PostMapping("/concern/{userId}")
+    @ApiOperation(value = "收藏", notes = "收藏")
+    public ResponseResult concern(@RequestBody BksUserSchoolMajor bksUserSchoolMajor) {
+        majorService.save(bksUserSchoolMajor);
+        return success();
+    }
+
+
+    /**
+     * @param userId
+     * @param professorId
+     * @return
+     */
+    @PostMapping("/concernProfessor")
+    @ApiOperation(value = "备考生小程序用户关注专家", notes = "备考生小程序用户关注专家")
+    public ResponseResult concernProfessor(@ApiParam(value = "用户id", required = true) String userId,
+                                           @ApiParam(value = "专家id", required = true) String professorId) {
+        QueryWrapper<BksUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", professorId);
+        int count = userService.count(queryWrapper);
+        if (count < 1) {
+            return ResponseResult.app(0, 0, "关注的专家不存在", "");
+        }
+        QueryWrapper<BksUserSchoolMajor> query = new QueryWrapper<BksUserSchoolMajor>();
+        query.eq("user_Id", userId);
+        query.eq("professor_id", professorId);
+        int count1 = majorService.count(query);
+        if (count1 > 0) {
+            return ResponseResult.app(1, 1, "该专家已关注，请勿重复关注", "");
+        }
+        BksUserSchoolMajor bksUserSchoolMajor = new BksUserSchoolMajor();
+        bksUserSchoolMajor.setUserId(userId);
+        bksUserSchoolMajor.setProfessorId(professorId);
+        boolean save = majorService.save(bksUserSchoolMajor);
+        if (!save) {
+            return ResponseResult.app(0, 0, "关注失败", "");
+        }
+        return ResponseResult.app(0, 0, "关注成功", "");
+    }
+
+    @PostMapping("/removeConcernProfessor/{userId}")
+    @ApiOperation(value = "备考生小程序用户取消关注专家", notes = "备考生小程序用户取消关注专家")
+    public ResponseResult removeConcernProfessor(@ApiParam(value = "用户id", required = true) @PathVariable("userId") String userId,
+                                                 @ApiParam(value = "专家id", required = true) @RequestParam String professorId) {
+        if (professorId == null || "".equals(professorId)) {
+            return ResponseResult.app(1, 1, "请确认专家信息", "");
+        }
+        QueryWrapper<BksUserSchoolMajor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_Id", userId);
+        queryWrapper.eq("professor_id", professorId);
+        int count = majorService.count(queryWrapper);
+        if (count < 1) {
+            return ResponseResult.app(1, 1, "您未关注该专家", "");
+        }
+        boolean remove = majorService.remove(queryWrapper);
+        if (!remove) {
+            return ResponseResult.app(1, 1, "取消关注失败", "");
+        }
+        return ResponseResult.app(0, 0, "取消关注成功", "");
+    }
+
+
+    /**
+     * @param userId
+     * @param page
+     * @param size
+     * @param status
+     * @return
+     */
+    @GetMapping("/myOrder/{userId}")
+    @ApiOperation(value = "备考生小程序我的订单", notes = "备考生我的订单")
+    public ResponseResult myOrder(@ApiParam(value = "专家id", required = true) @PathVariable("userId") String userId,
+                                  @ApiParam(value = "当前页", required = true) Integer page,
+                                  @ApiParam(value = "每页数量", required = true) Integer size,
+                                  @ApiParam(value = "1:待付款2:待处理3:已完成4:已关闭", required = false) String status) {
+
+        QueryWrapper<BksQuestionOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        queryWrapper.orderByDesc("gmt_create");
+        if (status != null && !"".equals(status)) {
+            queryWrapper.eq("status", status);
+        }
+
+        int total = orderService.count(queryWrapper);
+
+        if (total <= 0) {
+            return ResponseResult.app(1, 1, "暂无订单", "");
+        }
+
+        Page<BksQuestionOrder> orderPage = new Page<>(page, size, total);
+        IPage<BksQuestionOrder> appointmentIPage = orderService.page(orderPage, queryWrapper);
+
+        if (appointmentIPage.getRecords() == null || appointmentIPage.getRecords().size() == 0) {
+            return ResponseResult.app(0, 0, "用户暂无订单", "");
+        }
+
+        List<Map<String, Object>> collect = appointmentIPage.getRecords().stream().map(x -> {
+            Map<String, Object> map = new HashMap<>();
+            // List<Map<String, Object>> mapList = new ArrayList<>();
+            if (x.getType() == 2) {
+                QueryWrapper<BksProfessorAppointment> query = new QueryWrapper<>();
+                query.eq("id", x.getAppointmentId());
+                query.eq("user_id", x.getUserId());
+                BksProfessorAppointment one = appointmentService.getOne(query);
+
+                if (one == null) {
+                    return ResponseResult.app(0, 0, "用户预约不存在", "");
+                }
+                map.put("orderId", x.getOrderId());
+                map.put("type", one != null ? one.getServiceType() : "");
+                map.put("way", one.getServiceWay());
+                map.put("professorId", one.getProfessorId());
+                map.put("professorName", one.getProfessorName());
+                map.put("cost", one.getCost());
+                map.put("status", x.getStatus());
+            } else {
+                QueryWrapper<BksQuestion> questionQueryWrapper = new QueryWrapper<>();
+                questionQueryWrapper.eq("id", x.getQuestionId());
+                questionQueryWrapper.eq("user_id", x.getUserId());
+                BksQuestion bksQuestion = questionService.getOne(questionQueryWrapper);
+                if (bksQuestion == null) {
+                    return ResponseResult.app(0, 0, "用户提问不存在", "");
+                }
+                map.put("orderId", x.getOrderId());
+                map.put("cost", bksQuestion.getMoney());
+                map.put("way", bksQuestion.getManner());
+                map.put("title", bksQuestion.getTitle());
+                map.put("status", x.getStatus());
+            }
+            return map;
+        }).collect(Collectors.toList());
+
+        return ResponseResult.page(0, "", Long.valueOf(total), collect);
+
+    }
+
+
+    /**
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/myOrder/info")
+    @ApiOperation(value = "备考生小程序订单详情", notes = "备考生小程序订单详情")
+    public ResponseResult myOrderInfo(
+            @ApiParam(value = "订单id", required = true) String orderId) {
+        QueryWrapper<BksQuestionOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id", orderId);
+        BksQuestionOrder one = orderService.getOne(queryWrapper);
+        if (one == null) {
+            return ResponseResult.app(0, 0, "该订单不存在", "");
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderId", one.getOrderId());
+        if (one.getType() == 2) {
+            QueryWrapper<BksProfessorAppointment> wrapper = new QueryWrapper<>();
+            wrapper.eq("id", one.getAppointmentId());
+            BksProfessorAppointment appointment = appointmentService.getOne(wrapper);
+            if (appointment == null) {
+                return ResponseResult.app(0, 0, "该预约不存在", "");
+            }
+            map.put("type", appointment.getServiceType());
+            map.put("way", appointment.getServiceWay());
+            map.put("professor", appointment.getProfessorName());
+            map.put("createTime", appointment.getGmtCreate());
+            map.put("description", appointment.getDescription());
+            map.put("payTime", one.getPayTime());
+            map.put("cost", one.getActualAmount());
+            map.put("status", one.getStatus());
+            QueryWrapper<BksProfessorTime> timeQueryWrapper = new QueryWrapper<>();
+            timeQueryWrapper.eq("appointment_id", appointment.getId());
+            List<BksProfessorTime> list = professorTimeService.list(timeQueryWrapper);
+            List<Map<String, Object>> collect = list.stream().map(o -> {
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("date", o.getDate());
+                map1.put("type", o.getType());
+                map1.put("end", o.getTimeType());
+                return map1;
+            }).collect(Collectors.toList());
+            map.put("appointTime", collect);
+
+        } else {
+            QueryWrapper<BksQuestion> questionQueryWrapper = new QueryWrapper<>();
+            questionQueryWrapper.eq("id", one.getQuestionId());
+            BksQuestion bksQuestion = questionService.getOne(questionQueryWrapper);
+            if (bksQuestion == null) {
+                return ResponseResult.app(0, 0, "该提问不存在", "");
+            }
+            map.put("type", bksQuestion.getTypeName());
+            map.put("way", bksQuestion.getManner());
+            map.put("professor", bksQuestion.getProfessorName());
+            map.put("questionTime", bksQuestion.getGmtCreate());
+            map.put("payTime", one.getPayTime());
+            map.put("endTime", bksQuestion.getGmtCreate());
+            map.put("title", bksQuestion.getTitle());
+            map.put("cost", bksQuestion.getMoney());
+            map.put("status", one.getStatus());
+        }
+        return ResponseResult.app(0, 0, "", map);
+
+    }
+
+}
+
+

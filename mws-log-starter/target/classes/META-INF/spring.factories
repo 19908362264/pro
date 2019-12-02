@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.benwunet.mws.log.autoconfigure.LogAutoConfiguration,\
+com.benwunet.mws.log.autoconfigure.LogAop

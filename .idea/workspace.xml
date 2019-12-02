@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ac1bab87-db58-460b-8143-f73ed7ccf098" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-base/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-bks/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-file/target/" />
+    <ignored path="$PROJECT_DIR$/mws-commons/target/" />
+    <ignored path="$PROJECT_DIR$/mws-log-starter/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-log/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-notification/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-result/target/" />
+    <ignored path="$PROJECT_DIR$/mws-model/mws-model-oauth/target/" />
+    <ignored path="$PROJECT_DIR$/mws-register-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-bks-b/target/" />
+    <ignored path="$PROJECT_DIR$/mws-register-center/mws-register-center-8761/target/" />
+    <ignored path="$PROJECT_DIR$/mws-notification-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-bks-c/target/" />
+    <ignored path="$PROJECT_DIR$/mws-oauth-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-monitor-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-bks-project/target/" />
+    <ignored path="$PROJECT_DIR$/mws-file-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-config-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-log-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-register-center/mws-register-center-8762/target/" />
+    <ignored path="$PROJECT_DIR$/mws-gateway-zuul/target/" />
+    <ignored path="$PROJECT_DIR$/mws-test-client/target/" />
+    <ignored path="$PROJECT_DIR$/mws-register-center/mws-register-center-8763/target/" />
+    <ignored path="$PROJECT_DIR$/mws-user-center/target/" />
+    <ignored path="$PROJECT_DIR$/mws-bks-backend/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/TouristsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9855">
+              <caret line="389" column="20" selection-start-line="389" selection-start-column="20" selection-end-line="389" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationBatchController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationMajorController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationSchoolController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationVoluntaryController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="48" column="72" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="72" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/EnrollmentBatchControlController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="534">
+              <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/base/BaseController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="567">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+              <folding>
+                <element signature="e#282#283#0" expanded="true" />
+                <element signature="e#341#342#0" expanded="true" />
+                <element signature="e#435#436#0" expanded="true" />
+                <element signature="e#498#499#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/impl/BksSchoolServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/dao/BksSchoolDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1620">
+              <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>/user</find>
+      <find>/myAppointment</find>
+      <find>/myConcernProfessor</find>
+      <find>/user/img</find>
+      <find>popularity</find>
+      <find>listschoolbypopularity</find>
+      <find>professorService.page(pageQuery, query);</find>
+      <find>deci</find>
+      <find>listSchoolByPopularity</find>
+      <find>getSchoolMajors</find>
+      <find>bkssc</find>
+      <find>/fillvolunteer</find>
+      <find>limit</find>
+      <find>bksSimulationBatchVOList</find>
+      <find>useGeneratedKeys</find>
+      <find>sysUserClient</find>
+      <find>queryLastYearBatchAdmissionLine</find>
+      <find>type</find>
+      <find>myConcernProfessor</find>
+      <find>r.last</find>
+      <find>RequestParam</find>
+      <find>myConcernSchool</find>
+      <find>/position</find>
+      <find>/queryCollege</find>
+      <find>getmajorintroduce</find>
+      <find>getpage</find>
+      <find>&quot; limit &quot;</find>
+      <find>getPageCurrent</find>
+      <find>getPageCurrent() - 1</find>
+      <find>查询去年批次录取线</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/mws-oauth-center/src/main/java/com/benwunet/mws/oauth/config/AuthorizationServerConfig.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksProfessorAppointmentVO.java" />
+        <option value="$PROJECT_DIR$/mws-gateway-zuul/src/main/java/com/benwunet/mws/gateway/controller/SMSloginDo.java" />
+        <option value="$PROJECT_DIR$/mws-oauth-center/src/main/java/com/benwunet/mws/oauth/service/Impl/RedisClientDetailsService.java" />
+        <option value="$PROJECT_DIR$/mws-oauth-center/src/main/java/com/benwunet/mws/oauth/config/SecurityConfig.java" />
+        <option value="$PROJECT_DIR$/mws-oauth-center/src/main/java/com/benwunet/mws/oauth/service/Impl/UserDetailServiceImpl.java" />
+        <option value="$PROJECT_DIR$/mws-user-center/src/main/java/com/benwunet/mws/user/controller/PubSysUserController.java" />
+        <option value="$PROJECT_DIR$/mws-user-center/src/main/java/com/benwunet/mws/user/controller/bks/BksUserController.java" />
+        <option value="$PROJECT_DIR$/mws-oauth-center/src/main/java/com/benwunet/mws/oauth/config/ExceptionHandlerAdvice.java" />
+        <option value="$PROJECT_DIR$/mws-gateway-zuul/src/main/java/com/benwunet/mws/gateway/config/ExceptionHandlerAdvice.java" />
+        <option value="$PROJECT_DIR$/mws-gateway-zuul/src/main/java/com/benwunet/mws/gateway/controller/TokenController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/UserInfoController.java" />
+        <option value="$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksProfessor.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/resources/mapper/BksSchoolMapper.xml" />
+        <option value="$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksMajorCategory.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/CampusController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/ExamPredictController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/MajorCategoryController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/VoluntaryController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BatchVO.java" />
+        <option value="$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/vo/BksSimulationMajor.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/VoluntaryVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationMajor.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationBatch.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationVoluntary.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationMajorVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BksSimulationVoluntaryQueryVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationMajorController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/bksSimulationSchoolVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationSchoolVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationVoluntaryVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationBatchVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/schoolScore/Bks.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/schoolScore/BksSchoolScore.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/EnrollmentBatchControlController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSchoolScoreVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationVoluntaryController.java" />
+        <option value="$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksSchoolScore.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BaseQueryVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/MyConcernVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BksOrderVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BksOrderQueryVO.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/member/BksMemberController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/BksMemberService.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/impl/BksMemberServiceImpl.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/single/BksExamNewsController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/SchoolController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/single/BksOrderController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/MyController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/TouristsController.java" />
+        <option value="$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/base/BaseController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/JAVA/apache-maven-3.6.0" />
+        <option name="userSettingsFile" value="D:\JAVA\apache-maven-3.6.0\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="343" />
+    <option name="y" value="65" />
+    <option name="width" value="1400" />
+    <option name="height" value="823" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mws" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BKS-V2.3" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575086216192" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.benwunet.bks.model.vo" />
+      <recent name="com.benwunet.mws.oauth.config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\zhoux\main\BKS-V2.3\mws-bks-project\src\main\java\com\benwunet\bks\service\impl" />
+      <recent name="F:\zhoux\main\BKS-V2.3\mws-bks-project\src\main\java\com\benwunet\bks\service" />
+      <recent name="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-bks\src\main\java\com\benwunet\bks\model" />
+      <recent name="F:\zhoux\main\BKS-V2.3\mws-bks-project\src\main\resources\mapper" />
+      <recent name="F:\zhoux\main\BKS-V2.3\mws-bks-project\src\main\java\com\benwunet\bks\dao" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.GatewayZuulApplication">
+    <configuration name="BksBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-bks-backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.bks.BksBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BksProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-bks-project" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.bks.BksProjectApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-config-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.config.ConfigCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-file-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.file.FileCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayZuulApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-gateway-zuul" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.gateway.GatewayZuulApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LogCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-log-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.log.LogCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonitorCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-monitor-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.monitor.MonitorCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MwsBksBApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-bks-b" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.bks.MwsBksBApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MwsBksCApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-bks-c" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.bks.MwsBksCApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-notification-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.notification.NotificationCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-oauth-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.oauth.OauthCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterCenterApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mws-register-center-8761" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.benwunet.mws.register.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.register.RegisterCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-register-center-8762" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.register.RegisterCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <module name="mws-register-center-8761" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.benwunet.mws.register.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.register.RegisterCenterApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-test-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.demo.TestApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserCenterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mws-user-center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.benwunet.mws.user.UserCenterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.BksProjectApplication" />
+      <item itemvalue="Spring Boot.ConfigCenterApplication" />
+      <item itemvalue="Spring Boot.FileCenterApplication" />
+      <item itemvalue="Spring Boot.GatewayZuulApplication" />
+      <item itemvalue="Spring Boot.LogCenterApplication" />
+      <item itemvalue="Spring Boot.MonitorCenterApplication" />
+      <item itemvalue="Spring Boot.MwsBksBApplication" />
+      <item itemvalue="Spring Boot.MwsBksCApplication" />
+      <item itemvalue="Spring Boot.NotificationCenterApplication" />
+      <item itemvalue="Spring Boot.OauthCenterApplication" />
+      <item itemvalue="Spring Boot.TestApplication" />
+      <item itemvalue="Spring Boot.UserCenterApplication" />
+      <item itemvalue="Spring Boot.RegisterCenterApplication" />
+      <item itemvalue="Spring Boot.BksBackendApplication" />
+      <item itemvalue="Spring Boot.RegisterCenterApplication (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.RegisterCenterApplication (1)" />
+        <item itemvalue="Spring Boot.RegisterCenterApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\windows7\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-b" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-b" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-backend" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-backend" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-c" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-c" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-project" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-bks-project" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-commons" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-commons" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-config-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-config-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-file-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-file-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-gateway-zuul" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-gateway-zuul" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-log-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-log-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-log-starter" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-log-starter" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-base" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-base" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-bks" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-bks" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-file" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-file" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-log" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-log" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-notification" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-notification" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-oauth" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-oauth" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-result" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-model\mws-model-result" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-monitor-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-monitor-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-notification-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-notification-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-oauth-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-oauth-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8761" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8761" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8762" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8762" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8763" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-register-center\mws-register-center-8763" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-test-client" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-test-client" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3\mws-user-center" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3\mws-user-center" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\zhoux\main\BKS-V2.3" />
+          <option name="myCopyRoot" value="F:\zhoux\main\BKS-V2.3" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac1bab87-db58-460b-8143-f73ed7ccf098" name="Default Changelist" comment="" />
+      <created>1573867897705</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573867897705</updated>
+      <workItem from="1573867905592" duration="2265000" />
+      <workItem from="1573870319088" duration="266000" />
+      <workItem from="1573870608256" duration="39000" />
+      <workItem from="1573870846964" duration="125744000" />
+      <workItem from="1574642382354" duration="34655000" />
+      <workItem from="1574739139666" duration="28602000" />
+      <workItem from="1574989901917" duration="9896000" />
+      <workItem from="1575246831992" duration="199000" />
+    </task>
+    <task id="LOCAL-00001" summary="版本冲突">
+      <created>1573869009275</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573869009275</updated>
+    </task>
+    <task id="LOCAL-00002" summary="会员模块">
+      <created>1573871760621</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573871760621</updated>
+    </task>
+    <task id="LOCAL-00003" summary="会员模块">
+      <created>1573875803852</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573875803852</updated>
+    </task>
+    <task id="LOCAL-00004" summary="版本冲突解决">
+      <created>1573890960022</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573890960022</updated>
+    </task>
+    <task id="LOCAL-00005" summary="会员模块">
+      <created>1574039446027</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574039446027</updated>
+    </task>
+    <task id="LOCAL-00006" summary="登录">
+      <created>1574058437870</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1574058437870</updated>
+    </task>
+    <task id="LOCAL-00007" summary="小程序登录">
+      <created>1574230392819</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1574230392819</updated>
+    </task>
+    <task id="LOCAL-00008" summary="短信登录">
+      <created>1574235878986</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1574235878986</updated>
+    </task>
+    <task id="LOCAL-00009" summary="高校信息">
+      <created>1574392179402</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1574392179402</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修改">
+      <created>1574646602669</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1574646602669</updated>
+    </task>
+    <task id="LOCAL-00011" summary="模拟填报">
+      <created>1574669372531</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1574669372531</updated>
+    </task>
+    <task id="LOCAL-00012" summary="查询去年批次录取线">
+      <created>1574673387801</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1574673387801</updated>
+    </task>
+    <task id="LOCAL-00013" summary="queryCollegeByBatchAndProvince">
+      <created>1574674953963</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1574674953963</updated>
+    </task>
+    <task id="LOCAL-00014" summary="queryCollegeByBatchAndProvince">
+      <created>1574681141217</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1574681141217</updated>
+    </task>
+    <task id="LOCAL-00015" summary="会员">
+      <created>1574748839092</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1574748839092</updated>
+    </task>
+    <task id="LOCAL-00016" summary="学校">
+      <created>1574759535235</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1574759535235</updated>
+    </task>
+    <task id="LOCAL-00017" summary="个人中心">
+      <created>1574824919326</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1574824919326</updated>
+    </task>
+    <task id="LOCAL-00018" summary="新闻 订单">
+      <created>1574840262366</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1574840262366</updated>
+    </task>
+    <task id="LOCAL-00019" summary="高校信息">
+      <created>1574907483383</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1574907483383</updated>
+    </task>
+    <task id="LOCAL-00020" summary="高校信息">
+      <created>1575079464082</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1575079464082</updated>
+    </task>
+    <task id="LOCAL-00021" summary="baseC">
+      <created>1575079647289</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1575079647289</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="201732000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49585405" visible="true" weight="0.291309" />
+      <window_info id="Structure" order="1" sideWeight="0.5041459" side_tool="true" weight="0.26019314" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Duplicate detector" order="0" weight="0.32963374" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.24417314" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.32963374" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49946353" weight="0.31409544" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32963374" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5005365" side_tool="true" weight="0.27081022" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.40066594" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.32297447" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.3299356" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="版本冲突" />
+    <MESSAGE value="版本冲突解决" />
+    <MESSAGE value="会员模块" />
+    <MESSAGE value="登录" />
+    <MESSAGE value="小程序登录" />
+    <MESSAGE value="短信登录" />
+    <MESSAGE value="修改" />
+    <MESSAGE value="模拟填报" />
+    <MESSAGE value="查询去年批次录取线" />
+    <MESSAGE value="queryCollegeByBatchAndProvince" />
+    <MESSAGE value="会员" />
+    <MESSAGE value="学校" />
+    <MESSAGE value="个人中心" />
+    <MESSAGE value="新闻 订单" />
+    <MESSAGE value="高校信息" />
+    <MESSAGE value="baseC" />
+    <option name="LAST_COMMIT_MESSAGE" value="baseC" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/mws-test-client/src/main/java/com/benwunet/mws/demo/controller/TestController.java</url>
+          <line>31</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/schoolScore/BksSchoolScore.java" />
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/EnrollmentBatchControlService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/ExamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/SchoolScoreController.java" />
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSimulationVoluntaryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="9" selection-start-line="9" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/BksSchoolScoreVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="33" column="28" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksSchool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksSchoolScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.0/mybatis-plus-core-3.1.0.jar!/com/baomidou/mybatisplus/core/metadata/IPage.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.5.RELEASE/spring-web-5.1.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.1.0/mybatis-plus-extension-3.1.0.jar!/com/baomidou/mybatisplus/extension/service/impl/ServiceImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="189" column="32" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="32" />
+          <folding>
+            <element signature="e#7116#7117#0" expanded="true" />
+            <element signature="e#7189#7190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.1.0/mybatis-plus-extension-3.1.0.jar!/com/baomidou/mybatisplus/extension/service/IService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/MyConcernVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksUserSchoolMajor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/PayController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/ProfessorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="212" column="68" selection-start-line="212" selection-start-column="68" selection-end-line="212" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/QuestionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/UserInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/dao/BksExamNewsMapper.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/resources/mapper/BksExamNewsMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-model/mws-model-bks/src/main/java/com/benwunet/bks/model/BksExamNews.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/BksExamNewsService.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/impl/BksExamNewsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/member/BksMemberCardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/vo/QueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-527">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/BksMemberService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/util/PositionUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-758">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/ProvinceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="107" column="41" lean-forward="true" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/dto/BksSchoolDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/single/BksExamNewsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="46" column="114" lean-forward="true" selection-start-line="46" selection-start-column="114" selection-end-line="46" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/SchoolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="89" column="54" lean-forward="true" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/consult/MyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/member/BksMemberController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="41" column="14" lean-forward="true" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/single/BksOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="51" column="38" lean-forward="true" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/impl/BksMemberServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/BksSchoolService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/ScoreQueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/ExamPredictionQueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BksSimulationVoluntaryQueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="22" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BksOrderQueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/model/queryVO/BaseQueryVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/TouristsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9855">
+          <caret line="389" column="20" selection-start-line="389" selection-start-column="20" selection-end-line="389" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationBatchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationMajorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationSchoolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/simulation/BksSimulationVoluntaryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="48" column="72" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/base/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#498#499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/service/impl/BksSchoolServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/dao/BksSchoolDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mws-bks-project/src/main/java/com/benwunet/bks/controller/tourists/EnrollmentBatchControlController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>mws-model-bks</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ant:ant:1.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

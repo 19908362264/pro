@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksUserDao">
+
+    <select id="getCategory" resultType="com.benwunet.bks.model.BksMajorCategory">
+        select major_category_name,level1 from bks_major_category mc
+        WHERE parent_id = 0
+        AND colleges_id = #{collegesId}
+    </select>
+
+    <select id="findMajorCategory" resultType="com.benwunet.bks.dto.MajorCategory" parameterType="com.benwunet.bks.model.vo.MajorCategoryVo">
+         SELECT  DISTINCT
+         school.school_id,
+         school.school_name,
+         school.province_id,
+         province.province_name,
+         major.major_category_id,
+         major.major_name,
+         school.f211,
+         colleges.colleges_name,
+         school.f985
+         FROM
+         bks_major major
+         INNER JOIN bks_school school ON major.school_id = school.school_id
+         INNER JOIN bks_province province ON school.province_id = province.province_id
+         INNER JOIN bks_colleges colleges ON school.colleges_id = colleges.colleges_id
+        WHERE major_category_id = #{majorCategoryId} AND school.school_name LIKE "%"#{majorName}"%" LIMIT #{page}, 10;
+    </select>
+
+    <select id="findMajorCategoryCount" resultType="int"  parameterType="com.benwunet.bks.dto.MajorCategory">
+        SELECT
+        COUNT(1)
+        FROM
+        bks_major major
+        INNER JOIN bks_school school ON major.school_id = school.school_id
+        INNER JOIN bks_province province ON school.province_id = province.province_id
+        INNER JOIN bks_colleges colleges ON school.colleges_id = colleges.colleges_id
+        WHERE major_category_id = #{majorCategoryId} AND school.school_name LIKE "%"#{majorName}"%"
+    </select>
+    <select id="getAttentionedSchoolDetails" resultType="com.benwunet.bks.model.dto.BksAttentionedSchoolsDTO">
+        SELECT
+            sc.school_id,
+            sc.school_name,
+            ca.campus_name,
+            pr.province_name
+        FROM
+	        bks_school sc
+        INNER JOIN
+	        bks_campus ca ON sc.campus_id = ca.campus_id
+        INNER JOIN
+	        bks_province pr ON sc.province_id = pr.province_id
+        WHERE
+	        sc.school_id = #{schoolId}
+    </select>
+
+    <select id="getAttentionedMajorDetails" resultType="com.benwunet.bks.model.dto.BksAttentionedMajorsDTO">
+
+        SELECT
+            major_category_id,
+            major_category_name,
+            code,
+            bachelor_degree,
+            level1_name,
+            level2_name,
+            level3_name,
+            course
+        FROM
+        bks_major_category
+        WHERE
+	      major_category_id = #{majorCategoryId}
+    </select>
+
+    <select id="countUniversity" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM bks_major_category AS c
+        LEFT JOIN bks_major AS a ON  a.major_category_id = c.major_category_id
+        LEFT JOIN bks_school AS b ON a.school_id = b.school_id
+        WHERE a.major_category_id = #{major_category_id}
+    </select>
+
+
+    <select id="getSchoolMajorTotal" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM `bks_user_school_major`
+        <where>
+            user_id = #{userId}
+            <if test='type == "m"'>
+                AND major_id IS NOT NULL
+            </if>
+            <if test='type == "s"'>
+                AND school_id IS NOT NULL
+            </if>
+        </where>
+    </select>
+    <select id="getSchoolScore" resultType="com.benwunet.bks.model.dto.BksAttentionedSchoolsDTO">
+        SELECT
+            `year`,
+            average,
+            min
+        FROM
+            bks_school_score
+        WHERE
+            school_id = #{schoolId} AND province = #{provinceId}
+        ORDER BY `year` DESC,min ASC
+        LIMIT 0,1
+    </select>
+
+</mapper>

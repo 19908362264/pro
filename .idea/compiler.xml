@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mws-bks-b" />
+        <module name="mws-bks-backend" />
+        <module name="mws-bks-c" />
+        <module name="mws-bks-project" />
+        <module name="mws-commons" />
+        <module name="mws-config-center" />
+        <module name="mws-file-center" />
+        <module name="mws-gateway-zuul" />
+        <module name="mws-log-center" />
+        <module name="mws-log-starter" />
+        <module name="mws-model-base" />
+        <module name="mws-model-bks" />
+        <module name="mws-model-file" />
+        <module name="mws-model-log" />
+        <module name="mws-model-notification" />
+        <module name="mws-model-oauth" />
+        <module name="mws-model-result" />
+        <module name="mws-monitor-center" />
+        <module name="mws-notification-center" />
+        <module name="mws-oauth-center" />
+        <module name="mws-register-center-8761" />
+        <module name="mws-register-center-8762" />
+        <module name="mws-register-center-8763" />
+        <module name="mws-test-client" />
+        <module name="mws-user-center" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mws" target="1.8" />
+      <module name="mws-bks-b" target="1.8" />
+      <module name="mws-bks-backend" target="1.8" />
+      <module name="mws-bks-c" target="1.8" />
+      <module name="mws-bks-project" target="1.8" />
+      <module name="mws-commons" target="1.8" />
+      <module name="mws-config-center" target="1.8" />
+      <module name="mws-file-center" target="1.8" />
+      <module name="mws-gateway-zuul" target="1.8" />
+      <module name="mws-log-center" target="1.8" />
+      <module name="mws-log-starter" target="1.8" />
+      <module name="mws-model" target="1.8" />
+      <module name="mws-model-base" target="1.8" />
+      <module name="mws-model-bks" target="1.8" />
+      <module name="mws-model-file" target="1.8" />
+      <module name="mws-model-log" target="1.8" />
+      <module name="mws-model-notification" target="1.8" />
+      <module name="mws-model-oauth" target="1.8" />
+      <module name="mws-model-result" target="1.8" />
+      <module name="mws-monitor-center" target="1.8" />
+      <module name="mws-notification-center" target="1.8" />
+      <module name="mws-oauth-center" target="1.8" />
+      <module name="mws-register-center" target="1.8" />
+      <module name="mws-register-center-8761" target="1.8" />
+      <module name="mws-register-center-8762" target="1.8" />
+      <module name="mws-register-center-8763" target="1.8" />
+      <module name="mws-test-client" target="1.8" />
+      <module name="mws-user-center" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mws-bks-b" options="-parameters" />
+      <module name="mws-bks-backend" options="-parameters" />
+      <module name="mws-bks-c" options="-parameters" />
+      <module name="mws-bks-project" options="-parameters" />
+      <module name="mws-commons" options="-parameters" />
+      <module name="mws-config-center" options="-parameters" />
+      <module name="mws-file-center" options="-parameters" />
+      <module name="mws-gateway-zuul" options="-parameters" />
+      <module name="mws-log-center" options="-parameters" />
+      <module name="mws-log-starter" options="-parameters" />
+      <module name="mws-model-base" options="-parameters" />
+      <module name="mws-model-bks" options="-parameters" />
+      <module name="mws-model-file" options="-parameters" />
+      <module name="mws-model-log" options="-parameters" />
+      <module name="mws-model-notification" options="-parameters" />
+      <module name="mws-model-oauth" options="-parameters" />
+      <module name="mws-model-result" options="-parameters" />
+      <module name="mws-monitor-center" options="-parameters" />
+      <module name="mws-notification-center" options="-parameters" />
+      <module name="mws-oauth-center" options="-parameters" />
+      <module name="mws-register-center-8761" options="-parameters" />
+      <module name="mws-register-center-8762" options="-parameters" />
+      <module name="mws-register-center-8763" options="-parameters" />
+      <module name="mws-test-client" options="-parameters" />
+      <module name="mws-user-center" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="user-id" content="ihong" />
+	<!-- icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+	<link rel="icon" type="image/png" href="/img/favicon.png" />
+	<!-- style -->
+	<link rel="stylesheet" href="/css/base.css">
+	<script src="/js/lib/jquery-3.4.1.js"></script>
+	<!-- current head -->
+	<title>本无课堂</title>
+	<meta name="keywords" content="SEO关键词" />
+	<meta name="description" content="SEO描述" />
+	<link rel="stylesheet" href="/css/user.css">
+</head>
+<body>
+<div id="doc" class="doc bg-gray">
+
+	<div class="topbar bar-black">
+		<div class="wrap">
+			<div class="top-head" data-nav="tzy">
+				<div class="head-logo">
+					<a href="#" title="备考生" class="logo"><img src="img/logo.png" alt=""></a>
+					<div class="region">
+						<em>[<span>江苏</span><i></i>]</em>
+						<div class="box">
+							<ul>
+								<li><a>江苏</a></li><li><a>浙江</a></li><li><a>安徽</a></li><li><a>河南</a></li><li><a>河北</a></li>
+								<li><a>湖南</a></li><li><a>湖北</a></li><li><a>江西</a></li><li><a>广东</a></li><li><a>广西</a></li>
+								<li><a>山东</a></li><li><a>山西</a></li><li><a>陕西</a></li><li><a>贵州</a></li><li><a>云南</a></li>
+								<li><a>四川</a></li><li><a>重庆</a></li><li><a>辽宁</a></li><li><a>吉林</a></li><li><a>福建</a></li>
+								<li><a>新疆</a></li><li><a>甘肃</a></li><li><a>黑龙江</a></li><li><a>内蒙古</a></li>
+							</ul>
+							<form action="/version/" enctype="text/html; charset=UTF-8" method="POST" id="versionform">
+								<input type="hidden" name="_csrf" value="62bbe747-9b12-412c-a344-d1e51509caa7">
+								<input type="hidden" id="versionname" name="version" value="江苏">
+								<input type="hidden" id="changeurl" name="changeurl" value="">
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="head-nav">
+					<ul>
+						<!--<li data-id="index"><a href="index.html">首页</a></li>-->
+						<li data-id="news"><a href="news.html">填志愿</a></li>
+						<li data-id="xycx"><a href="school-inquiry.html">查学校</a></li>
+						<li data-id="specialty"><a href="specialty.html">查专业</a></li>
+						<li data-id="ccj"><a href="login.html">查成绩</a></li>
+					</ul>
+				</div>
+
+				<div class="user-info" data-gxon="hover">
+					<a href="javascript:;">
+						<div class="user-avatar">
+							<div class="avatar oh">
+								<img src="img/avatar.jpg" title="晓东" alt="晓东">
+							</div>
+						</div>
+						<div class="user-name">晓东 <i class="arrow"></i></div>
+					</a>
+					<div class="user-action hide">
+						<ul>
+							<li><a href="user.html">个人中心</a></li>
+							<li><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="doc-hd">
+		<div class="head-slogan h160" style="background-image: url(img/new/bg-slogan.jpg)">
+			<div class="wrap">
+				<div class="head">
+					<div class="left">
+						<div class="title">备考生<span class="city">[重庆版]</span></div>
+					</div>
+					<div class="right">
+						<div class="title">
+							成绩录入
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="doc-bd">
+		<div class="user-wrap cl">
+			<div class="wrap">
+				<aside class="side-rail">
+					<div class="personal-info">
+						<div class="avatar-inner" style="background-image: url(/upload/school-logo.jpg)">
+						</div>
+						<div class="info">
+							<div class="name">重庆大学</div>
+							<div class="detail">
+								<span class="space">学校</span>
+								<span class="space">重庆市</span>
+								<span class="space">沙坪坝区</span>
+							</div>
+						</div>
+					</div>
+					<div class="personal-menu">
+						<div class="card">
+							<div class="card-hd"><a href="user-grade-query.html">成绩查询</a></div>
+							<div class="card-hd"><a href="user-grade-query.html">成绩分析</a></div>
+							<div class="card-hd on"><a href="user-grade-query.html">成绩上传</a></div>
+						</div>
+					</div>
+				</aside>
+				<div class="main-rail">
+					<div class="tabs user-course">
+						<div class="tabs-hd">
+							<ul class="tabs-nav">
+								<li class="tabs-tab on"><a href="javascript:;">成绩上传</a></li>
+							</ul>
+						</div>
+						<div class="tabs-bd">
+							<div class="school-score">
+								<div class="score-upload">
+									<div class="tips">请从电脑中选择Excel表格导入成绩：</div>
+
+									<div id="uploader" class="wu-example">
+										<!--用来存放文件信息-->
+										<form id="uploadFile" action="#">
+											<div class="gxui-cell">
+												<div class="gxui-cell__bd"><div class="gxui-input"></div></div>
+												<div class="gxui-cell__ft">
+													<div id="picker" class="btn btn-blue"><input class="upload-file" name="file" type="file" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' value="" />浏览</div>
+													<button id="ctlBtn" class="btn btn-orange btn-submit" type="button">上传</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="card score-table">
+									<div class="card-hd">
+										<form action="/" method="get" id="query">
+											<div class="sub-tit">成绩上传结果</div>
+											<div class="gxui-cell">
+												<div class="gxui-cell__bd"><input name="examName" class="gxui-input" placeholder="请输入文件名" th:value="${examName}"  /></div>
+												<div class="gxui-cell__ft">
+													<button class="btn btn-blue btn-submit" type="button" id="query_btn">查询</button>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="card-bd" style="overflow: auto">
+										<table class="table table-striped table-hover table-grade table-head-blue" id="upload">
+											<thead>
+											<tr>
+												<th>文件名</th>
+												<th>学生数量</th>
+												<th>用户</th>
+												<th>时间</th>
+												<th>状态</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="e : ${list}">
+												<td th:text="${e.examName}">2019三诊</td>
+												<td th:text="${e.rowCount}">2019三诊</td>
+												<td th:text="${e.operatorName}">2019三诊</td>
+												<td th:text="${e.gmt}">2019三诊</td>
+												<td th:text="${e.sta}">2019三诊</td>
+											</tr>
+											</tbody>
+
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+<!--底部-->
+<div class="doc-ft foot-fixed-seat">
+	<div class="foot-fixed">
+		<div class="wrap cl">
+			<div class="ft-text">
+				<div class="nav">
+					<ul>
+						<li><a href="#">意见反馈</a></li>
+						<li><a href="javascript:;">使用帮助</a></li>
+						<li><a href="javascript:;">使用协议</a></li>
+						<li><a href="javascript:;">隐私条款</a></li>
+						<li><a href="javascript:;">免责声明</a></li>
+						<li><a href="javascript:;">关于我们</a></li>
+						<li><a href="javascript:;">推广合作</a></li>
+					</ul>
+				</div>
+				<div class="info">
+					©2019 <a href="http://www.benwunet.com">benwunet.com</a> 本无网络旗下高考志愿填报参考系统  渝ICP备17012560号
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- public javascript -->
+<script type="text/javascript" src="/js/lib/layer/layer.js"></script>
+<script type="text/javascript" src="/js/pages/main.js"></script>
+<!--<script type="text/javascript" src="js/common.js"></script>-->
+
+<!-- current javascript -->
+
+<!--引入JS-->
+<script>
+
+	$(function(){
+		var URL = window.URL || window.webkitURL;
+		var uploadedImageName = '';
+		var file = '';
+		$('.upload-file').change(function () {
+			var files = this.files;
+			filename = files[0];
+			if (files && files.length) {
+				var reg = /^.*\.(?:xls|xlsx)$/i
+				if (reg.test(filename.name)) {
+					file = filename;
+					$('.wu-example .gxui-input').text(filename.name)
+				} else {
+					layer.msg('请选择Excel文件进行上传');
+				}
+			}
+		});
+		$("#uploadFile .btn-submit").click(function () {
+			console.log(file)
+			//uploadFile
+			//添加获取文件信息
+			var formdata=new FormData();
+			formdata.append('enctype', 'multipart/form-data');
+//		        formdata.append('name', 'file');
+			console.log(file.name)
+			formdata.append('name', file.name);
+			// formdata.append('file', $('#file').get(0).files[0]);
+			formdata.append('file', file);
+			$.ajax({
+				url:'/upload/xls',
+				type:'post',
+				contentType:false,
+				data:formdata,
+				processData:false,
+				success:function(info){
+
+					console.log(info)
+
+				},
+				error:function(err){
+					console.log(err)
+				}
+			});
+		})
+		$("#query_btn").click(function () {
+			$("#query").submit()
+		})
+
+	});
+
+</script>
+
+</body>
+</html>

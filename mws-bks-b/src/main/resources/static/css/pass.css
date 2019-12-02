@@ -1,0 +1,59 @@
+@charset "utf-8";/**
+ * Style V1.0
+ * Author fuxiaoqing
+ * Update date @2019-03-21
+ */
+.doc,
+.doc-bd{background-color: #f5f5f5;}
+/*报错提示*/
+.error-tips{position:absolute;top:-42px;width:100%;height: 42px;overflow: hidden;}
+.error-tips .error,
+.ipt-tips-default{/*position: absolute;top:0;left:0;*/display:block;width:inherit;padding:0 12px;border:1px solid #d46f16;border-radius:2px;background:#ffe6e5;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;align-items:center;display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-moz-flex;display:-ms-flexbox;display:flex;}
+.ipt-tips-default a{color:#25cfcf;}
+.error-tips .error,
+.ipt-default-current{height:42px;}
+
+
+.pass-form .wrap{background-color: #229fff;}
+.pass-form .pic{float: left;display: block;}
+.pass-form .gxui-form{margin-left:610px;padding:110px 140px 110px 50px;height: 484px;color: #fff;}
+
+/*登录，注册，找回密码通用input*/
+.pass-form .card-hd{height: 40px;line-height: 40px;font-size: 24px;font-weight:bold;text-align:center;overflow: hidden;}
+.pass-form .card-bd{position:relative;padding-top: 30px;}
+.pass-form .gxui-cell{position:relative;min-height:42px;margin-top:23px;}
+.pass-form .gxui-cell__hd{position:absolute;top:10px;left:11px;width:24px;height:24px;z-index:2;}
+.pass-form .gxui-cell__hd .bwico{display:none;width:24px;height:24px;line-height:24px;font-size:20px;color:#aaa;text-align:center;}
+.pass-form .gxui-cell__bd{height:inherit;z-index:1;}
+.pass-form .gxui-input{padding-left:40px;height: 40px;line-height: 38px;color:#fff;border:0;border-bottom: 1px solid #fff;}
+.pass-form .card-bd .error{color: #ffc107}
+.pass-form .card-bd .error::placeholder{color: #ffc107}
+.pass-form .gxui-input::placeholder{color:#fff;;}
+.pass-form .gxui-input:hover{background: none;}
+.pass-form .gxui-input:focus{background: none;}
+.pass-form .gxui-code .gxui-cell__ft{padding-left:20px;height:inherit;}
+.pass-form .gxui-code .gxui-cell__ft .btn{padding-left:10px;padding-right:10px;line-height: 38px;}
+.pass-form .gxui-code .gxui-cell__ft .btn-code{width: 112px;font-size:20px;color: #333;}
+.pass-form .gxui-code .gxui-cell__ft .btn-mcode{width: 130px;color: #229fff;}
+.pass-form .btn-cell{margin-top: 40px;}
+.pass-form .btn-cell .btn{line-height: 26px;font-size:20px;color: #229fff;}
+.pass-form .login-links{margin-top:5px;height:32px;line-height:32px;text-align: center;}
+.pass-form .agreement{height:32px;line-height:32px;}
+.pass-form .agreement .checkbox{display: inline-block;cursor: pointer}
+.pass-form .agreement .checkbox input[type=checkbox]{width: 0;height: 0;font-size: 0;opacity: 0;}
+.pass-form .agreement .checkbox .layui-icon-ok{position:relative;display:inline-block;width:10px;height: 10px;line-height: 10px;font-size:10px;border:1px solid #fff;overflow: hidden;}
+.pass-form .agreement .checkbox .layui-icon-ok:before{content: '';display:none;position: absolute;left: 2px;top: -1px;border: 1px solid transparent;border-top-color: #fff;border-left-color: #fff;transform: rotate(45deg);-ms-transform: rotate(45deg);-moz-transform: rotate(45deg);-webkit-transform: rotate(-140deg);-o-transform: rotate(45deg);width: 4px;height: 6px;font-size: 0;}
+.pass-form .agreement .checkbox.checked{}
+.pass-form .agreement .checkbox.checked .layui-icon-ok:before{display: inline-block;}
+.pass-form .agreement.error .layui-icon-ok{border-color: #eb1313}
+
+
+/*其他方式登录*/
+.other-login{margin-top:30px;}
+.other-login .tit{height: 24px;line-height: 24px;text-align: center;color: #969696;overflow: hidden;}
+.other-login .con{margin-top:40px;font-size:0;text-align:center;}
+.other-login .con a{display: inline-block;margin-left:50px;text-align: center;overflow: hidden;}
+.other-login .con a:first-child{margin-left: 0;}
+.other-login .con .bwico{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;font-size:24px;color:#fff;background-color: #00c486;border-radius: 50%;overflow: hidden;}
+.other-login .con .bw-qq{background-color: #00baef;}
+.other-login .con .bw-sina{background-color: #ff003c;}

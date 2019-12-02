@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksUniversityEnrollGdfMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benwunet.bks.model.BksUniversityEnrollGdf">
+        <result column="yxbh" property="yxbh"/>
+        <result column="yxmc" property="yxmc"/>
+        <result column="zymc" property="zymc"/>
+        <result column="lqrs" property="lqrs"/>
+        <result column="lqzdf" property="lqzdf"/>
+        <result column="lqzgf" property="lqzgf"/>
+        <result column="nf" property="nf"/>
+        <result column="zysm" property="zysm"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        yxbh, yxmc, zymc, lqrs, lqzdf, lqzgf, nf, zysm
+    </sql>
+    <select id="matchMajor" resultMap="BaseResultMap">
+        select yxmc,zymc from bks_university_enroll_gdf
+        where lqzdf>=500 and yxmc in
+        (select school_name from bks_school where school_id in
+        (select distinct school_id from bks_school_score
+        where province=#{provinceId} and score>=#{score})) LIMIT 3
+    </select>
+
+</mapper>

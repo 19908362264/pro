@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksUserExamDao">
+
+    <select id="getExamList" resultType="com.benwunet.bks.model.dto.BksExamDTO">
+        SELECT exam.exam_id,
+        exam.exam_name,
+        user_exam.`user_id`,
+        user_exam.user_exam_id,
+        score.user_score,
+        course.course_id,
+        course.course_name
+        FROM
+        bks_exam exam
+
+        INNER JOIN bks_user_exam user_exam ON exam.exam_id = user_exam.exam_id
+
+        INNER JOIN bks_student_score score ON user_exam.user_exam_id = score.user_exam_id
+
+        INNER JOIN bks_course course ON course.course_id = score.course_id
+        <where>
+            <if test="userId != null and userId != ''">
+                user_exam.`user_id` = #{userId}
+            </if>
+
+
+            <if test="examId != null and examId != ''">
+                and user_exam.exam_id=#{examId}
+            </if>
+
+
+            <if test="courseId != null and courseId != ''">
+                and course.course_id = #{courseId}
+            </if>
+
+        </where>
+
+    </select>
+
+
+</mapper>

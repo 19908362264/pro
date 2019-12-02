@@ -1,0 +1,488 @@
+package com.benwunet.mws.gateway.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.benwunet.bks.model.BksUser;
+import com.benwunet.mws.commons.dto.MemberWeChatAppletDetailsInfoDTO;
+import com.benwunet.mws.commons.dto.WechatAppletLogin2DTO;
+import com.benwunet.mws.commons.dto.WechatAppletLoginDTO;
+import com.benwunet.mws.commons.dto.WechatAppletLoginReg2DTO;
+import com.benwunet.mws.commons.exception.RuntimeBusinessException;
+import com.benwunet.mws.commons.result.RequestResult;
+import com.benwunet.mws.commons.utils.JacksonUtil;
+import com.benwunet.mws.commons.utils.PubSysUserUtil;
+import com.benwunet.mws.commons.vo.LoginTokenVO;
+import com.benwunet.mws.commons.wechat.Jcode2SessionUtils;
+import com.benwunet.mws.gateway.feign.*;
+import com.benwunet.mws.gateway.util.MobileUtil;
+import com.benwunet.mws.gateway.vo.loginUserVO;
+import com.benwunet.mws.model.base.LoginPubSysUser;
+import com.benwunet.mws.model.base.PubSysUser;
+import com.benwunet.mws.model.base.constants.CredentialType;
+import com.benwunet.mws.model.log.PubLogSysLog;
+import com.benwunet.mws.model.oauth.SystemClientInfo;
+import com.benwunet.mws.model.result.ResponseResult;
+import com.benwunet.mws.model.result.ResultCode;
+import com.benwunet.mws.model.result.ResultErrorCode;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.util.OAuth2Utils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+
+/**
+ * 登陆、刷新token、退出
+ *
+ * @author xiangkaihong
+ * @date 2019/5/4 11:59
+ */
+
+@Slf4j
+@RestController
+public class TokenController {
+
+    @Autowired
+    private Oauth2Client oauth2Client;
+
+    @Autowired
+    private SysUserClient sysUserClient;
+
+    @Autowired
+    private BksClient bksClient;
+    @Autowired
+    private BksBClient bksBClient;
+
+    /**
+     * 系统登陆
+     * 根据用户名登录<br>
+     * 采用oauth2密码模式获取access_token和refresh_token
+     *
+     * @param userName
+     * @param password
+     * @return
+     * @author xiangkaihong
+     * @date 2019/5/4 12:02
+     */
+    @PostMapping("/sys/login")
+    public Map<String, Object> login(String userName, String password) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        /**parameters.put("userName", userName);*/
+        /**为了支持多类型登录，这里在username后拼装上登录类型*/
+        parameters.put("username", userName + "|" + CredentialType.USERNAME.name());
+        parameters.put("password", password);
+
+        //System.out.println("AABB: " +  parameters);
+        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+        saveLoginLog(userName, "用户名密码登陆");
+        return tokenInfo;
+    }
+
+
+    /**
+     * 备考生登录获取token
+     */
+    @PostMapping("/bks/user/login")
+    @ApiOperation(value = "备考生c端登录",notes = "备考生c端登录")
+    public ResponseResult BksLogin(@ApiParam(value = "手机号",required = true) String mobile,
+                                   @ApiParam(value = "密码",required = true) String password) {
+
+          try{
+              PubSysUser validateUser = sysUserClient.validateUser(mobile);
+              if (validateUser == null) {
+                  throw new NullPointerException("用户信息不存在");
+              }
+              if (!validateUser.getIsUse()) {
+                  throw new NullPointerException("用户已被禁用");
+              }
+              Map<String, String> parameters = new HashMap<>();
+              parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+              parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+              parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+              parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+              /**parameters.put("userName", userName);*/
+              /**为了支持多类型登录，这里在username后拼装上登录类型*/
+              parameters.put("username",mobile + "|" + CredentialType.USERNAME.name());
+              parameters.put("password", password);
+              //System.out.println("AABB: " +  parameters);
+              Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+              saveLoginLog( mobile, "用户名密码登陆");
+             // LoginPubSysUser user = sysUserClient.getLoginPubSysUser(mobile);
+              BksUser user = bksClient.getUserBymobile(mobile);
+              Map<String, Object> data = new HashMap<>(12);
+              data.put("access_token", tokenInfo.get("access_token"));
+              Map<String, Object> data1 = new HashMap<>();
+              data1.put("user_id",user.getUserId());
+              data1.put("mobile", mobile);
+              data1.put("nick_name",user.getNickName()==null?"":user.getNickName());
+              data1.put("user_name",user.getStudentName()==null?"":user.getStudentName());
+              data1.put("head_img",user.getHeadImg()==null?"":user.getHeadImg());
+              data1.put("birthday",user.getBirthday()==null?"":user.getBirthday());
+              data1.put("email",user.getEmail()==null?"":user.getEmail());
+              data1.put("sex",user.getSex()==null?"":user.getSex());
+              data1.put("className",user.getClassName());
+              data1.put("status",validateUser.getRemark());
+              data.put("user",data1);
+              return ResponseResult.app(0, 0, "", data);
+          }catch (Exception e ){
+              e.printStackTrace();
+              return ResponseResult.app(ResultCode.PT_ERROR, ResultErrorCode.INTERFACE_ACCESS_FAILURE, " 用户名或密码错误", "");
+          }
+
+    }
+//
+//    @GetMapping("/test")
+//    public void tset(){
+//        BksUser user = bksClient.getUserBymobile("18508807793");
+//        System.out.println(user);
+//    }
+
+    /**
+     * 备考生b端登录获取token
+     */
+    @ApiOperation(value = "备考生b端登录",notes = "备考生b端登录")
+    @PostMapping("/bks-b/user/login")
+    public ResponseResult BksBLogin(
+            @ApiParam(value = "手机号",required = true) String mobile,
+            @ApiParam(value = "密码",required = true) String password){
+        try{
+            PubSysUser validateUser = sysUserClient.validateUser(mobile);
+            if (validateUser == null) {
+                throw new NullPointerException("用户信息不存在");
+            }
+            if (!validateUser.getIsUse()) {
+                throw new NullPointerException("用户已被禁用");
+            }
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+            parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+            parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+            parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+            /**parameters.put("userName", userName);*/
+            /**为了支持多类型登录，这里在username后拼装上登录类型*/
+            parameters.put("username", mobile + "|" + CredentialType.USERNAME.name());
+            parameters.put("password", password);
+            //System.out.println("AABB: " +  parameters);
+            Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+            saveLoginLog(mobile, "用户名密码登陆");
+            // LoginPubSysUser user = sysUserClient.getLoginPubSysUser(mobile);
+            BksUser user = bksBClient.getUserBymobile(mobile);
+            Map<String, Object> data = new HashMap<>();
+            data.put("access_token", tokenInfo.get("access_token"));
+            Map<String, Object> data1 = new HashMap<>();
+            data1.put("user_id",user.getUserId());
+            data1.put("mobile",mobile);
+            data1.put("nick_name",user.getNickName()==null?"":user.getNickName());
+            data1.put("head_img",user.getHeadImg()==null?"":user.getHeadImg());
+            data1.put("birthday",user.getBirthday()==null?"":user.getBirthday());
+            data1.put("sex",user.getSex()==null?"":user.getSex());
+            data1.put("school",user.getSchoolName());
+            data1.put("schoolId",user.getSchoolId());
+            data1.put("status",user.getStatus());
+            data1.put("usertype",validateUser.getUserType());
+            Date now = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            data1.put("loginTime",user.getLoginTime() == null ? sdf.format(now) : sdf.format(user.getLoginTime()));
+            data.put("user",data1);
+            bksBClient.updateLoginTime(mobile);
+            return ResponseResult.app(ResultCode.PT_OK, null, "", data);
+        }catch (Exception e ){
+            return ResponseResult.app(ResultCode.PT_ERROR, ResultErrorCode.INTERFACE_ACCESS_FAILURE, " 用户名或密码错误", "");
+        }
+
+    }
+//    @PostMapping("/xxx")
+//    public String xxx(){
+//        BksUser1 userBymobile = bksBClient.getUserBymobile("18508807793");
+//        return null;
+//    }
+
+
+
+    @Autowired
+    private NotificationClint notificationClint;
+
+    /**
+     * 备考生注册
+     */
+    @PostMapping("/register")
+    @ApiOperation(value = "备考生注册",notes = "备考生注册")
+    public ResponseResult bksRegister(@RequestBody loginUserVO vo ) {
+
+        boolean b = MobileUtil.checkMobile(vo.getMobile());
+        if(!b){
+            return ResponseResult.app(1, 1, "请输入正确的手机号", "");
+        }
+        String validMobile = notificationClint.matcheCodeAndGetMobile(vo.getKey(), vo.getCode(), false, 60);
+
+        if (validMobile == null || !validMobile.equals(vo.getMobile())){
+            return ResponseResult.app(1, 1, "验证码错误", "");
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("mobile", vo.getMobile());
+        params.put("password", vo.getPassword());
+        params.put("type",vo.getType());
+        ResponseResult responseResult = sysUserClient.bksRegister(params);
+        return responseResult;
+    }
+
+
+
+
+    /**
+     * 短信登录
+     * @param mobile
+     * @param key
+     * @param code
+     * @return
+     * @author xiangkaihong
+     * @date 2019/5/4 12:05
+     */
+    @PostMapping("/sys/login-sms")
+    public Map<String, Object> smsLogin(String mobile, String key, String code) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        /**为了支持多类型登录，这里在username后拼装上登录类型，同时为了校验短信验证码，我们也拼上code等*/
+        parameters.put("userName", mobile + "|" + CredentialType.MOBILE.name() + "|" + key + "|" + code + "|"
+                + DigestUtils.md5Hex(key + code));
+        /**短信登录无需密码，但security底层有密码校验，我们这里将手机号作为密码，认证中心采用同样规则即可*/
+        parameters.put("password", mobile);
+        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+        saveLoginLog(mobile, "手机号短信登陆");
+        return tokenInfo;
+    }
+
+    /**
+     * 微信登录
+     * @return
+     * @author xiangkaihong
+     * @date 2019/5/4 12:09
+     */
+    @PostMapping("/sys/login-wechat")
+    public Map<String, Object> smsLogin(String openId, String tempCode) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        /**为了支持多类型登录，这里在username后拼装上登录类型，同时为了服务端校验，我们也拼上tempCode*/
+        parameters.put("userName", openId + "|" + CredentialType.WECHAT_OPENID.name() + "|" + tempCode);
+        /**微信登录无需密码，但security底层有密码校验，我们这里将手机号作为密码，认证中心采用同样规则即可*/
+        parameters.put("password", tempCode);
+        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+        saveLoginLog(openId, "微信登陆");
+
+        return tokenInfo;
+    }
+
+    @Autowired
+    private SysLogClient sysLogClient;
+
+    /**
+     * 登陆日志
+     *
+     * @param userName
+     * @author xiangkaihong
+     * @date 2019/5/4 12:13
+     */
+    private void saveLoginLog(String userName, String remark) {
+        log.info("{}登陆", userName);
+        /**异步*/
+        CompletableFuture.runAsync(() -> {
+            try {
+                PubLogSysLog pubLogSysLog = PubLogSysLog.builder().userName(userName).moduleName("登陆").remark(remark).gmtCreate(new Date())
+                        .build();
+                sysLogClient.save(pubLogSysLog);
+            } catch (Exception e) {
+                /** do nothing*/
+            }
+
+        });
+    }
+
+    /**
+     * 系统刷新refresh_token
+     *
+     * @param refresh_token
+     * @return
+     * @author xiangkaihong
+     * @date 2019/5/4 12:19
+     */
+    @PostMapping("/sys/refresh_token")
+    public Map<String, Object> refresh_token(String refresh_token) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "refresh_token");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        parameters.put("refresh_token", refresh_token);
+        return oauth2Client.postAccessToken(parameters);
+    }
+
+    /**
+     * 退出
+     *
+     * @param access_token
+     * @author xiangkaihong
+     * @date 2019/5/4 12:22
+     */
+    @GetMapping("/sys/logout")
+    public ResponseResult logout(String access_token, @RequestHeader(required = false, value = "Authorization") String token) {
+        try {
+            if (StringUtils.isBlank(access_token)) {
+                if (StringUtils.isNoneBlank(token)) {
+                    access_token = token.substring(OAuth2AccessToken.BEARER_TYPE.length() + 1);
+                }
+            }
+            oauth2Client.removeToken(access_token);
+            return ResponseResult.app(ResultCode.PT_OK, ResultErrorCode.NOT_LOGIN, "用户已退出", "");
+        } catch (Exception e) {
+            return ResponseResult.app(ResultCode.PT_OK, ResultErrorCode.NOT_LOGIN, "token 已失效", "");
+        }
+
+    }
+
+    @ApiOperation(value = "微信小程序登陆", notes = "需要传入 小程序登录 DTO")
+    @PostMapping("/auth/login/wechat/applet")
+    public RequestResult<LoginTokenVO> wxxLogin(@RequestBody WechatAppletLoginReg2DTO dto) {
+        log.info("start - 微信小程序登陆");
+        String username = dto.getCode() + "|" + com.benwunet.mws.commons.constants.CredentialType.WECHAT_APPLET.name() + "|" + dto.getDistinction() + "|" + dto.getUserId();
+        RequestResult<LoginTokenVO> result = run(username, dto.getCode());
+        log.info("end - 微信小程序登陆");
+        return result;
+    }
+
+    // 业务逻辑处理
+    private RequestResult<LoginTokenVO> run(String username, String password) {
+        RequestResult<LoginTokenVO> result;
+        try {
+            LoginTokenVO vo = conversion(send(username, password));
+            result = RequestResult.ok(vo);
+            log.info("登录成功：{}", vo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = RequestResult.error(300100, e.getMessage());
+        }
+        return result;
+    }
+
+    private LoginTokenVO conversion(Map<String, Object> map) {
+        log.info("map:{}", map);
+        String token = (String) map.get("access_token");
+        String token_type = (String) map.get("token_type");
+        String refresh_token = (String) map.get("refresh_token");
+        int expires_in = (int) map.get("expires_in");
+        String scope = (String) map.get("scope");
+        return new LoginTokenVO(token, token_type, refresh_token, expires_in, scope);
+    }
+
+
+    private Map<String, Object> send(String username, String password) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        /** 为了支持多类型登录，这里在username后拼装上登录类型 */
+        parameters.put("username", username);
+        parameters.put("password", password);
+        return oauth2Client.postAccessToken(parameters);
+    }
+
+
+    @ApiOperation(value = "微信小程序注册（绑定手机号）登陆", notes = "需要传入 小程序登录 DTO")
+    @PostMapping("/auth/login/wechat/applet/reg")
+    public RequestResult<LoginTokenVO> wxxLogin(@RequestBody WechatAppletLogin2DTO dto) {
+        log.info("start - 微信小程序登陆");
+        String username = dto.getCode() + "|" + com.benwunet.mws.commons.constants.CredentialType.WECHAT_APPLET_REG_LOGIN.name() + "|" + dto.getDistinction() + "|" + dto.getData() + "|" + dto.getIv() + "|" + dto.getUserId();
+        RequestResult<LoginTokenVO> result = run(username, dto.getCode());
+        log.info("end - 微信小程序登陆");
+        return result;
+    }
+
+    @ApiOperation(value = "小程序授权", notes = "小程序授权")
+    @PostMapping("/api/zy-system/users-anon/getkeyuserinfo")
+    public RequestResult<Map<String, String>> getKeyUserInfo(@RequestBody WechatAppletLoginDTO dto) {
+        log.info("Start - 小程序授权开始：{}", dto);
+        Map<String, String> data = new HashMap<>();
+        Jcode2SessionUtils utils = new Jcode2SessionUtils();
+        //获取sessionKey
+        String jscode2session;
+        try {
+            jscode2session = utils.jscode2session(dto.getCode());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("微信小程序CODE解密失败，请输入正确CODE!");
+        }
+        JSONObject jsonObject = JSON.parseObject(jscode2session);
+        // 判断 code 解析使用情况
+        String errcode = jsonObject.getString("errcode");
+
+        if (!StringUtils.isEmpty(errcode)) {
+            throw new RuntimeException("CODE不能重复使用!");
+        }
+        // 获取 session_key
+        String key = jsonObject.getString("session_key");
+        // 解析小程序用户信息
+        String userInfo;
+        try {
+            userInfo = utils.getUserInfo(dto.getData(), key, dto.getIv());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("微信小程序数据解析异常，请输入正确数据!");
+        }
+        // 封装小程序用户信息
+        MemberWeChatAppletDetailsInfoDTO infoDTO = JacksonUtil.json2Obj(userInfo, MemberWeChatAppletDetailsInfoDTO.class);
+        if(ObjectUtils.isEmpty(infoDTO)){
+            throw new RuntimeException("小程序用户信息为空!");
+        }
+        if(ObjectUtils.isEmpty(infoDTO.getOpenId())){
+            throw new RuntimeException("openid为空!");
+        }
+        PubSysUser byWechatApplet = sysUserClient.findByWechatApplet(infoDTO.getOpenId());
+        if(ObjectUtils.isEmpty(byWechatApplet)){
+            log.info("End - 小程序授权结束：{}", "");
+            //TODO: 随机id（待修改）
+            data.put("user_id", UUID.randomUUID().toString().replace("-", "").substring(0, 16));
+            data.put("is_exist", "false");
+            return RequestResult.ok("根据openid查询用户为空!", data);
+        }
+        log.info("End - 小程序授权结束：{}", byWechatApplet.getUserId());
+        data.put("user_id", byWechatApplet.getUserId());
+        data.put("is_exist", "true");
+        return RequestResult.ok("根据openid查询用户成功!", data);
+    }
+
+    /**
+     * 小程序端查询个人中心信息
+     *
+     * @author zhoux
+     * @date 2019/10/31
+     */
+    @ApiOperation(value = "查询个人中心信息", notes = "前端需要带access_token值")
+    @GetMapping("/api/zy-member-miniprogram/v1.0/member-message")
+    public RequestResult<LoginPubSysUser> getLoginPubSysUser() {
+        LoginPubSysUser loginPubSysUser = PubSysUserUtil.getLoginPubSysUser();
+        if (loginPubSysUser != null) {
+            return RequestResult.ok("查询会员信息成功", loginPubSysUser);
+        } else {
+            return RequestResult.ok("未找到该用户的信息", null);
+        }
+    }
+
+}

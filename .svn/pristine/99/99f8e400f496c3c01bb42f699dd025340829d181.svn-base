@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksSchoolDao">
+
+    <select id="listSchoolByPopularity" resultType="com.benwunet.bks.model.BksSchool">
+        select * from bks_school s
+        order by s.popularity desc
+        LIMIT #{page},#{limit}
+    </select>
+
+    <!--  limit #{start}, #{length}  -->
+    <select id="listMajorByRanking" resultType="com.benwunet.bks.model.BksMajorCategory">
+        select * from bks_major_category mc
+        order by mc.major_category_heat_ranking desc
+        <if test="start != null and start >= 0 and length != null and length > 0">
+            limit #{start}, #{length}
+        </if>
+    </select>
+
+
+    <select id="getSchoolList" resultType="com.benwunet.bks.model.dto.BksSchoolDTO">
+        SELECT
+        a.school_id,
+        a.school_name,
+        b.colleges_name,
+        d.province_name,
+        c.campus_name
+        FROM
+        `bks_school` AS a
+        INNER JOIN bks_colleges AS b ON a.colleges_id = b.colleges_id
+        INNER JOIN bks_campus AS c ON a.campus_id = c.campus_id
+        INNER JOIN bks_province AS d ON a.province_id = d.province_id
+        <where>
+            <if test="provinceId != null and provinceId != ''">
+                d.province_id = #{provinceId}
+            </if>
+
+            <if test="levelId != null and levelId != ''">
+                and a.colleges_id = #{levelId}
+            </if>
+
+            <if test="kindId != null and kindId != ''">
+                and a.campus_id = #{kindId}
+            </if>
+
+            <if test="schoolName != null and schoolName != ''">
+
+                and a.school_name like "%"#{schoolName}"%"
+
+            </if>
+
+            <if test="tx == 1">
+                and a.f211 = '1'
+
+
+            </if>
+            <if test="tx == 2">
+                and a.f985 = '1'
+
+
+            </if>
+
+        </where>
+        LIMIT #{page},10
+    </select>
+
+    <select id="getSchoolListCount" resultType="int" >
+        SELECT
+        count(1)
+        FROM
+        bks_school AS a
+        INNER JOIN bks_colleges AS b ON a.colleges_id = b.colleges_id
+        INNER JOIN bks_campus AS c ON a.campus_id = c.campus_id
+        INNER JOIN bks_province AS d ON a.province_id = d.province_id
+        <where>
+            <if test="provinceId != null and provinceId != ''">
+                and d.province_id = #{provinceId}
+            </if>
+
+            <if test="levelId != null and levelId != ''">
+                and a.colleges_id = #{levelId}
+            </if>
+
+            <if test="kindId != null and kindId != ''">
+                and a.campus_id = #{kindId}
+            </if>
+
+            <if test="schoolName != null and schoolName != ''">
+
+                and a.school_name like "%"#{schoolName}"%"
+
+            </if>
+
+            <if test="tx == 1">
+                and a.f211 = '1'
+
+
+            </if>
+            <if test="tx == 2">
+                and a.f985 = '1'
+
+
+            </if>
+
+        </where>
+
+    </select>
+    <select id="matchUniversity" resultType="com.benwunet.bks.model.BksSchool">
+        select *
+        from bks_school
+        where school_id in
+        (select distinct school_id from bks_school_score where province=#{provinceId} and score>=#{score})
+
+    </select>
+
+
+</mapper>

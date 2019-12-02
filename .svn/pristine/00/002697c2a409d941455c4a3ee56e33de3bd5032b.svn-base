@@ -1,0 +1,56 @@
+package com.benwunet.bks.controller.single;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.benwunet.bks.controller.base.BaseController;
+import com.benwunet.bks.model.BksExamNews;
+import com.benwunet.bks.model.queryVO.BaseQueryVO;
+import com.benwunet.bks.model.vo.QueryVO;
+import com.benwunet.bks.service.BksExamNewsService;
+import com.benwunet.bks.service.BksMemberService;
+import com.benwunet.mws.model.result.ResponseResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 高考新闻 前端控制器
+ * </p>
+ *
+ * @author zhoux
+ * @since 2019-11-27
+ */
+@RestController
+@Api(value = "高考新闻 前端控制器", tags = "高考新闻 前端控制器")
+@RequestMapping("/bksExamNews")
+public class BksExamNewsController extends BaseController {
+
+    @Autowired
+    private BksExamNewsService bksExamNewsService;
+
+    /**
+     * 查询高考新闻
+     */
+    @PostMapping("/queryBksExamNews")
+    @ApiOperation(value = "查询高考新闻", notes = "查询高考新闻")
+    public ResponseResult queryBksExamNews(@RequestBody BaseQueryVO baseQueryVO) {
+        QueryWrapper<BksExamNews> bksExamNewsQueryWrapper = new QueryWrapper<>();
+        int count = bksExamNewsService.count(bksExamNewsQueryWrapper);
+        if(!ObjectUtils.isEmpty(baseQueryVO.getPageCurrent()) && !ObjectUtils.isEmpty(baseQueryVO.getPageSize())){
+            bksExamNewsQueryWrapper.last(" limit " + (baseQueryVO.getPageCurrent() - 1) * baseQueryVO.getPageSize()
+                    + "," + baseQueryVO.getPageSize());
+        }
+        List<BksExamNews> bksExamNewsList = bksExamNewsService.list(bksExamNewsQueryWrapper);
+        return success(count, bksExamNewsList);
+    }
+
+}
+

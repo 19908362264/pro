@@ -1,0 +1,66 @@
+package com.benwunet.bks.controller.tourists;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.benwunet.bks.model.BksMajorCategory;
+import com.benwunet.bks.service.BksMajorCategoryService;
+import com.benwunet.mws.model.result.ResponseResult;
+import com.benwunet.mws.model.result.ResultCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 专业大类 接口
+ * @author FC
+ * @date 2019/6/21 10:05
+ */
+@RestController
+@RequestMapping("/bks-anon/majorcategory")
+public class MajorCategoryController {
+
+    @Autowired
+    private BksMajorCategoryService majorCategoryService;
+
+    /**
+     * 获取专业概况 接口
+     *
+     * course--核心课程
+     * introduce--专业介绍
+     * effect--就业方向
+     * content--综合介绍
+     *
+     * @return ResponseResult -- map
+     * @param categoryId
+     * @author FC
+     * @date 2019/6/21 10:06
+     */
+    @GetMapping("/getmajorintroduce")
+    public ResponseResult getMajorIntroduce(String categoryId){
+        BksMajorCategory category = majorCategoryService.getOne(new QueryWrapper<BksMajorCategory>().eq("major_category_id",categoryId));
+        if (category != null) {
+            Map<String, String> map = new HashMap<>(4);
+            map.put("course", category.getCourse());
+            map.put("introduce", category.getIntroduce());
+            map.put("effect", category.getEffect());
+            map.put("content", category.getContent());
+
+            return ResponseResult.app(0,ResultCode.PT_OK,"查询成功",map);
+        }else {
+            return ResponseResult.app(1, ResultCode.PT_ERROR,"查询失败",null);
+        }
+    }
+
+
+
+    public ResponseResult getRemark(){
+
+        return  null;
+
+    }
+
+}

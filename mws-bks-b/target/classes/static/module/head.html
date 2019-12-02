@@ -1,0 +1,58 @@
+<div class="topbar<!--#if expr="$topbar_bg = black" --> bar-black<!--#elif expr="$topbar_bg = white" --> bar-white<!--#endif -->">
+	<div class="wrap">
+		<div class="top-head" data-nav="<!--#echo var="head_nav_id" -->">
+			<div class="head-logo">
+				<a href="#" title="备考生" class="logo"><img src="img/logo.png" alt=""></a>
+				<div class="region">
+					<em>[<span>江苏</span><i></i>]</em>
+					<div class="box">
+						<ul>
+							<li><a>江苏</a></li><li><a>浙江</a></li><li><a>安徽</a></li><li><a>河南</a></li><li><a>河北</a></li>
+							<li><a>湖南</a></li><li><a>湖北</a></li><li><a>江西</a></li><li><a>广东</a></li><li><a>广西</a></li>
+							<li><a>山东</a></li><li><a>山西</a></li><li><a>陕西</a></li><li><a>贵州</a></li><li><a>云南</a></li>
+							<li><a>四川</a></li><li><a>重庆</a></li><li><a>辽宁</a></li><li><a>吉林</a></li><li><a>福建</a></li>
+							<li><a>新疆</a></li><li><a>甘肃</a></li><li><a>黑龙江</a></li><li><a>内蒙古</a></li>
+						</ul>
+						<form action="/version/" enctype="text/html; charset=UTF-8" method="POST" id="versionform">
+							<input type="hidden" name="_csrf" value="62bbe747-9b12-412c-a344-d1e51509caa7">
+							<input type="hidden" id="versionname" name="version" value="江苏">
+							<input type="hidden" id="changeurl" name="changeurl" value="">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="head-nav">
+				<ul>
+					<!--<li data-id="index"><a href="index.html">首页</a></li>-->
+					<li data-id="news"><a href="news.html">填志愿</a></li>
+					<li data-id="xycx"><a href="school-inquiry.html">查学校</a></li>
+					<li data-id="specialty"><a href="specialty.html">查专业</a></li>
+					<li data-id="ccj"><a href="login.html">查成绩</a></li>
+				</ul>
+			</div>
+		<!--#if expr="$login_active = true" -->
+		<div class="user-info" data-gxon="hover">
+			<a href="javascript:;">
+				<div class="user-avatar">
+					<div class="avatar oh">
+						<img src="img/avatar.jpg" title="晓东" alt="晓东">
+					</div>
+				</div>
+				<div class="user-name">晓东 <i class="arrow"></i></div>
+			</a>
+			<div class="user-action hide">
+				<ul>
+					<li><a href="user.html">个人中心</a></li>
+					<li><a href="javascript:;">退出</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--#else -->
+			<div class="head-login">
+				<a href="login.html" class="btn  btn-blue btn-login">登录</a>
+				<a href="register.html" class="btn btn-blue btn-border btn-register">注册</a>
+			</div>
+		<!--#endif -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-bks-b" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-bks-backend" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-bks-c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-bks-project" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-config-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-file-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-gateway-zuul" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-log-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-log-starter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-bks" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-file" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-notification" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-oauth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-model/mws-model-result" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-monitor-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-notification-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-oauth-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-register-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8761" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8762" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8763" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-test-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mws-user-center" charset="UTF-8" />
+  </component>
+</project>

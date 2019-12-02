@@ -1,0 +1,92 @@
+package com.benwunet.bks.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.benwunet.bks.dao.BksMemberMapper;
+import com.benwunet.bks.feign.UserClient;
+import com.benwunet.bks.model.*;
+import com.benwunet.bks.service.*;
+import com.benwunet.mws.commons.utils.PubSysUserUtil;
+import com.benwunet.mws.model.base.LoginPubSysUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+/**
+ * <p>
+ * 会员表 服务实现类
+ * </p>
+ *
+ * @author zhoux
+ * @since 2019-11-15
+ */
+@Service
+public class BksMemberServiceImpl extends ServiceImpl<BksMemberMapper, BksMember> implements BksMemberService {
+
+    @Autowired
+    private BksUserService userService;
+
+    @Autowired
+    private BksMemberPermissionService bksMemberPermissionService;
+
+    @Autowired
+    private BksMemberCardService bksMemberCardService;
+
+    @Autowired
+    private BksOrderService bksOrderService;
+
+    @Transactional
+    @Override
+    public BksOrder openMember(String userId) {
+        //1.新增会员
+        LoginPubSysUser loginPubSysUser = PubSysUserUtil.getLoginPubSysUser();
+        LocalDateTime now = LocalDateTime.now();
+        BksMember bksMember = new BksMember()
+                .setName("普通会员")
+                .setPrice(new BigDecimal(299))
+                .setOpeningTime(now)
+                .setValidTime(12)
+                .setGmtCreate(now)
+                .setOperatorId(loginPubSysUser.getUserId())
+                .setOperatorName(loginPubSysUser.getUsername());
+        this.save(bksMember);
+        //2.为user添加会员id
+        if (ObjectUtils.isEmpty(userId)) {
+            userService.update(new BksUser().setMemberId(bksMember.getId()),
+                    new QueryWrapper<BksUser>().eq("user_id", loginPubSysUser.getUserId()));
+        } else {
+            userService.update(new BksUser().setMemberId(bksMember.getId()),
+                    new QueryWrapper<BksUser>().eq("user_id", userId));
+        }
+        //3.添加会员权限
+        bksMemberPermissionService.save(new BksMemberPermission().setName("志愿表分析").setMemberId(bksMember.getId())
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberPermissionService.save(new BksMemberPermission().setName("高考预测").setMemberId(bksMember.getId())
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberPermissionService.save(new BksMemberPermission().setName("测评推专业").setMemberId(bksMember.getId())
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberPermissionService.save(new BksMemberPermission().setName("智能推荐志愿表").setMemberId(bksMember.getId())
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberPermissionService.save(new BksMemberPermission().setName("报考风险系数分析").setMemberId(bksMember.getId())
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberPermissionService.save(new BksMemberPermission().setName("名师视频").setMemberId(bksMember.getId()).setGmtCreate(now)
+                .setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername()));
+        //4.添加会员卡券
+        bksMemberCardService.save(new BksMemberCard().setName("免费咨询").setUseStatus(true).setStatus(true).setServiceTypeId(1)
+                .setMemberId(bksMember.getId()).setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId())
+                .setOperatorName(loginPubSysUser.getUsername()));
+        bksMemberCardService.save(new BksMemberCard().setName("免费咨询").setUseStatus(true).setStatus(true).setServiceTypeId(1)
+                .setMemberId(bksMember.getId()).setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId())
+                .setOperatorName(loginPubSysUser.getUsername()));
+        //5.添加订单
+        BksOrder bksOrder = new BksOrder().setNumber(System.currentTimeMillis() + "").setServiceType("开通会员").setPrice(new BigDecimal(299))
+                .setTime(now).setWay("微信支付").setUserId(ObjectUtils.isEmpty(userId) ? loginPubSysUser.getUserId() : userId)
+                .setGmtCreate(now).setOperatorId(loginPubSysUser.getUserId()).setOperatorName(loginPubSysUser.getUsername());
+        bksOrderService.save(bksOrder);
+        return bksOrder;
+    }
+}

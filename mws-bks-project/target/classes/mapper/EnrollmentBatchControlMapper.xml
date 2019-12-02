@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.EnrollmentBatchControlDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benwunet.bks.model.EnrollmentBatchControl">
+        <id column="id" property="id" />
+        <result column="enrollment_year" property="enrollmentYear" />
+        <result column="enrollment_batch" property="enrollmentBatch" />
+        <result column="enrollment_control_score" property="enrollmentControlScore" />
+        <result column="admitted" property="admitted"/>
+        <result column="province_id" property="provinceId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, enrollment_year, enrollment_batch, enrollment_control_score
+    </sql>
+
+</mapper>

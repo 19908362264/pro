@@ -1,0 +1,62 @@
+	<div class="volunteer-filter<!--#if expr="$hot_show = true" --> hot-search<!--#endif -->">
+		<div class="wrap">
+			<ul class="filter-nav">
+				<li class="on"><a href="#">做预测</a></li>
+				<li><a href="#">查成绩</a></li>
+				<li><a href="#">找专业</a></li>
+			</ul>
+			<div class="filter-form cl">
+				<form id="schoolFilter" action="#">
+					<input name="page" value="2" type="hidden">
+					<label class="gxui-cell">
+						<div class="gxui-cell__hd">省/市：</div>
+						<div class="gxui-cell__bd autoMatchBox">
+							<input name="areaCode" type="hidden" placeholder="请选择省/市" />
+							<input class="gxui-input AMInput" name="area" autocomplete="off" placeholder="请选择省/市" type="text" />
+						</div>
+					</label>
+					<label class="gxui-cell">
+						<div class="gxui-cell__hd">文/理：</div>
+						<div class="gxui-cell__bd">
+							<!--<input class="gxui-input" name="type" placeholder="请选择文/理科" type="text" />-->
+							<div class="gxui-select" role="select" tabindex="0">
+								<label class="gxui-select__input">
+									<input class="gxui-select__original" name="grade" value="" type="hidden" placeholder="请选择文/理科" tabindex="-1" />
+									<span class="gxui-select__label">请选择文/理科</span>
+									<em class="gxui-select__arrow"></em>
+								</label>
+								<ul class="gxui-select__list">
+									<!--<li data-value="0">请选择文/理科</li>-->
+									<li data-value="1">文科</li>
+									<li data-value="2">理科</li>
+								</ul>
+							</div>
+						</div>
+					</label>
+					<label class="gxui-cell">
+						<div class="gxui-cell__hd">分数：</div>
+						<div class="gxui-cell__bd">
+							<input class="gxui-input" name="number" autocomplete="off" placeholder="预测分数" type="text" />
+						</div>
+					</label>
+					<label class="gxui-cell">
+						<div class="gxui-cell__bd">
+							<button class="btn btn-orange btn-submit" type="submit">预测</button>
+						</div>
+					</label>
+				</form>
+			</div>
+			<!--#if expr="$hot_show = true" -->
+			<div class="hot">热搜榜：
+				<a href="#">重庆大学</a>
+				<a href="#">清华大学</a>
+				<a href="#">北京大学</a>
+				<a href="#">复旦大学</a>
+				<a href="#">中央美术学院</a>
+				<a href="#">人民大学</a>
+			</div>
+			<!--#else -->
+
+			<!--#endif -->
+		</div>
+	</div>

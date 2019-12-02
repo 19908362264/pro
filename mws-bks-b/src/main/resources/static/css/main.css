@@ -1,0 +1,219 @@
+@charset "utf-8";
+/**
+* Style V1.0
+* Author fuxiaoqing
+* Update date @2019-03-21
+*/
+.bg-gray{background-color: #f0f0f0;}
+
+
+.indexSlide{height: 450px;}
+.indexSlide .swiper-slide{background-position: top center}
+
+/*志愿筛选*/
+.volunteer-filter{position:relative;padding:50px 0;height: 150px;background: url(../img/bg.jpg) no-repeat center bottom;background-size: cover;z-index: 99;}
+.volunteer-filter .hot{margin-top:40px;text-align: center;color: #fff;}
+.volunteer-filter .hot a{margin-right: 15px;}
+.volunteer-filter .filter-form{padding:40px 0 0;text-align: center;}
+.volunteer-filter .filter-form form{display: inline-block;text-align: left;}
+.volunteer-filter .filter-form .gxui-cell{float: left;position:relative;margin-left:30px;}
+.volunteer-filter .filter-form .gxui-cell:first-child{margin-left:0;}
+.volunteer-filter .filter-form .gxui-cell__hd{font-size:16px;color: #fff;}
+.volunteer-filter .filter-form .gxui-input{width: 240px;background-color: #fff;height: 40px;line-height: 38px;border-radius:0;border: 0;}
+.volunteer-filter .filter-form .gxui-select{height: 40px;border: 0;}
+.volunteer-filter .filter-form .gxui-select__input{width: 240px;height: 40px;line-height:40px;background-color: #fff;}
+.volunteer-filter .filter-form .btn{width: 120px;font-size: 16px;line-height: 26px;}
+.volunteer-filter .filter-nav{color:#fff;font-size: 24px;font-weight: bold;text-align: center}
+.volunteer-filter .filter-nav li{display:inline-block;margin-left: 30px;}
+.volunteer-filter .filter-nav li:first-child{margin-left:0;}
+.volunteer-filter .filter-nav li a{display:inline-block;padding: 0 20px;height: 54px;line-height: 54px;border-bottom: 4px solid transparent}
+.volunteer-filter .filter-nav .on a{color: #feae24;border-bottom-color: #feae24;}
+/*自动匹配列表*/
+.AMList{position: absolute;top:100%;width:100%;max-height:190px;background-color: #fff;border:1px solid #f0f0f0;box-sizing:border-box;overflow: hidden;}
+.AMList ul{padding:15px;max-height:190px;overflow-y: auto;}
+.AMList li{display:inline-block;padding:0 10px;height: 36px;line-height: 36px;text-align: left;overflow: hidden;}
+.hot-search{padding:90px 0 160px;height:200px;}
+/*在谷歌下移除input[number]的上下箭头*/
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button{-webkit-appearance: none !important;margin: 0;}
+/*在firefox下移除input[number]的上下箭头*/
+input[type="number"]{-moz-appearance:textfield;}
+
+/*新闻*/
+.news-wrap{}
+.news-wrap .headlines{margin-right: 20px;}
+.news-wrap .card{float:left;display:block;padding:40px;width: 590px;border: 1px solid #f4f4f4;border-radius: 2px;background-color:#fff;box-sizing:border-box;overflow: hidden;}
+.news-wrap .card-hd{position:relative;height:40px;line-height:40px;font-size: 22px;color: #969696;}
+.news-wrap .card-hd .more{position:absolute;right:0;top:0;font-size:14px;color: #258dff;}
+.news-wrap .card-hd strong{margin-right:10px;color: #258dff;}
+.news-wrap .card-bd{padding: 20px 0 0;}
+.news-wrap .card-bd li{margin-bottom: 30px;}
+.news-wrap .pic{float:left;display:block;width: 130px;height: 86px;background:#f9f9f9 no-repeat center center;background-size:cover;overflow: hidden;}
+.news-wrap .tit{margin-left: 160px;height: 48px;line-height: 24px;font-size:16px;overflow: hidden;}
+.news-wrap .info{margin:20px 0 0 160px;height: 20px;line-height: 20px;font-size:12px;color: #969696;overflow: hidden;}
+.news-wrap .info span{margin-left: 20px;}
+.news-wrap .info span:first-child{margin-left: 0;}
+
+
+
+/*学校筛选*/
+.filter-school{padding:20px 0 0;background-color: #fff;}
+.filter-school .search-school{margin: 20px 50px 0;padding-bottom:25px;border-bottom:2px solid #f0f0f0;}
+.filter-school .search-school form{width: 590px;}
+.filter-school .search-school form .gxui-input{height:40px;line-height:38px;border-color: #d2d2d2;}
+.filter-school .search-school form .gxui-cell__ft{margin-left: 10px;}
+.filter-school .search-school form .btn{width: 80px;line-height: 40px}
+.filter-school .filter-classify{padding:40px 50px 15px;}
+.filter-school .filter-classify .filter-cell{padding-bottom: 15px;}
+.filter-school .filter-classify .tit{float: left;display: block;height: 30px;line-height: 30px;font-weight: bold;}
+.filter-school .filter-classify .con{margin-left: 90px;}
+.filter-school .filter-classify .con .on{line-height:28px;border: 1px solid #258dff;border-radius: 2px;color: #258dff;box-sizing: border-box;}
+.filter-school .filter-classify .con li{display: inline-block;margin-bottom:4px;height: 30px;line-height: 30px;overflow: hidden;}
+.filter-school .filter-classify .con li a{display: inline-block;padding: 0 15px;}
+/*专业筛选*/
+.school-specialty{}
+.school-specialty .search-school{margin-left:40px;margin-right:40px;border-bottom: 0;}
+.school-specialty .search-school form{width: auto;border-radius: 3px;overflow: hidden;}
+.school-specialty .search-school form .gxui-input{background-color: #f7f7f7;border: 0;}
+.school-specialty .search-school form .gxui-input::placeholder{color: #d2d2d2;}
+.school-specialty .search-school form .gxui-cell__ft{margin-left: 0;}
+.school-specialty .search-school form .btn{border-radius: 0;}
+.school-specialty .filter-classify{padding:0 40px 15px;font-size: 16px;border-bottom: 1px solid #f5f5f5}
+.school-specialty .filter-classify .tit{font-weight:normal;color: #229fff;}
+.school-specialty .filter-classify .con{margin-left: 70px;}
+.school-specialty .filter-classify .con .on{line-height:28px;background-color:#229fff;border: 1px solid #229fff;border-radius: 2px;color: #fff;box-sizing: border-box;}
+
+/*专业列表*/
+.specialty-wrap .main{background-color: #fff;}
+.specialty-wrap .specialty-result{padding: 0 40px;}
+.specialty-wrap .select-title{padding:30px 0;height: 50px;line-height: 50px;text-align:center;font-size: 30px;overflow: hidden;background-color: #fff;}
+.specialty-wrap .select-result{padding:0 10px;height: 36px;line-height: 36px;font-size: 12px;color: #999999;background-color: #fafafa;}
+.specialty-wrap .select-result span.num{margin: 0 10px;color: #ff0000;}
+/*专业详情*/
+.specialty-wrap .side{float: right;display:block;width: 290px;}
+.specialty-wrap .side~.main{margin-right: 300px;}
+.specialty-hd{}
+.specialty-hd .tit{height:40px;line-height:40px;font-size: 32px;}
+.specialty-hd .tit .label{line-height:18px;color: #999;vertical-align: middle}
+.specialty-hd .tit .label span{margin:0;padding:0;border: 0;vertical-align: middle}
+.specialty-hd .tab{margin-bottom:10px;height:36px;line-height:36px;font-size: 20px;overflow: hidden;}
+.specialty-hd .tab .space span{color: #ff8533;}
+.specialty-hd .row{height: auto;}
+.specialty-hd .row .space{color: #666666;}
+.specialty-hd .btn-follow{position: absolute;top: 0;right: 0;}
+.specialty-bd{}
+.specialty-bd .table,
+.specialty-bd .table td,
+.specialty-bd .table th{border: 0;font-size:16px;font-weight:normal;text-align: center;}
+.specialty-bd .table thead{background-color: #48b0ff;color: #fff;}
+.specialty-bd .main .tabs-hd{height: 38px;line-height: 38px;font-size: 0;background-color: #f0f0f0;}
+.specialty-bd .main .tabs-hd .tabs-tab{display:inline-block;font-size: 16px;background-color:#d9d9d9;color: #666666;}
+.specialty-bd .main .tabs-hd .tabs-tab a{display:inline-block;padding:0 26px;height: inherit;line-height: inherit;}
+.specialty-bd .main .tabs-hd .tabs-tab.on{background-color:#fff;color: #229fff;}
+.specialty-bd .main .tabs-bd{padding:20px 26px;}
+.specialty-bd .list-tips{position:relative;margin-bottom:15px;height: 36px;line-height: 36px;font-size: 12px;color: #999999;}
+.specialty-bd .list-tips .search-school{position:absolute;right:0;top:0;width:236px;}
+.specialty-bd .list-tips .search-school form{width: auto;border-radius: 3px;overflow: hidden;}
+.specialty-bd .list-tips .search-school form .gxui-cell{height:28px;line-height:28px;}
+.specialty-bd .list-tips .search-school form .gxui-input{height:28px;line-height:28px;background-color: #f7f7f7;border: 0;}
+.specialty-bd .list-tips .search-school form .gxui-input::placeholder{color: #d2d2d2;}
+.specialty-bd .list-tips .search-school form .gxui-cell__ft{margin-left: 0;font-size: 0;}
+.specialty-bd .list-tips .search-school form .btn{width:56px;height:28px;line-height:28px;border-radius: 0;border: 0;}
+.specialty-bd .remark-on{padding:15px 14px;background-color: #fff;}
+.specialty-bd .remark-on .card-hd{height: 34px;line-height: 34px;text-align: center;font-size: 20px;color: #333;}
+.specialty-bd .remark-on .card-bd{padding-top:20px;font-size: 0;}
+.specialty-bd .remark-on li{display: inline-block;margin-left:10px;text-align: center;}
+.specialty-bd .remark-on li:first-child{margin-left: 0;}
+.specialty-bd .remark-on li .num{height: 24px;line-height: 24px;font-size: 12px;color: #333;}
+.specialty-bd .remark-on li .bar{margin:0 auto;width: 28px;height: auto;}
+.specialty-bd .remark-on li.green .bar{background-color: #1fd738}
+.specialty-bd .remark-on li.orange .bar{background-color: #ff8533}
+.specialty-bd .remark-on li.red .bar{background-color: #fa6161}
+.specialty-bd .remark-on li .btn{margin-top:10px;padding:0;width: 78px;height: 26px;line-height: 24px;font-size: 12px;color: #333;background-color: #fafafa;}
+.specialty-bd .specialty-introduce{min-height: 500px;}
+.specialty-bd .specialty-introduce .tit{min-height:40px;line-height:40px;font-size: 20px;color: #229fff;}
+.specialty-bd .specialty-introduce .con{padding-top:10px;line-height:26px;color: #999;}
+.specialty-bd .specialty-introduce .con strong{color: #333;}
+.specialty-bd .specialty-introduce .con p{margin-bottom:10px;}
+.specialty-bd .specialty-introduce .con img{display:block;margin:20px 0 45px;width:100%\9;height:100%\9;}
+.specialty-bd .specialty-introduce .con img{max-width:100%;max-height:100%;}
+.specialty-bd .specialty-introduce .con .img{margin:20px 0 45px;}
+.specialty-bd .specialty-introduce .con .img img{margin:0;}
+
+
+/*学校列表、学校详情*/
+.school-wrap{}
+.school-wrap .side{float: right;display:block;width: 290px;}
+.school-wrap .side~.main{margin-right: 300px;}
+.school-wrap .main{}
+.school-wrap .card{}
+.school-wrap .card .card-hd{padding:0 30px;height: 52px;line-height: 52px;background-color: #fff;overflow: hidden;}
+.school-wrap .card .card-hd span.num{margin: 0 10px;color: #ff0000;}
+.school-wrap .card .card-bd{}
+
+/*学校头部*/
+.school-hd{position:relative;height:230px;color:#fff;background: url(../img/bg-blue.jpg) no-repeat center bottom;background-size: cover;}
+.school-hd .wrap{padding: 65px 0;box-sizing: border-box;}
+.school-hd .school-logo{float:left;display:block;margin:5px 0 0;width: 100px;height: 100px;background:#f9f9f9 no-repeat center center;background-size:cover;border-radius:50%;overflow: hidden;
+-webkit-box-shadow: 0 2px 10px 1px rgba(34,36,38,0.35);-moz-box-shadow: 0 2px 10px 1px rgba(34,36,38,0.35);box-shadow: 0 2px 10px 1px rgba(34,36,38,0.35);}
+.school-hd .school-logo img{width:100%;height:100%;overflow: hidden;}
+.school-hd .school-detailed{margin:0 150px 0 140px;}
+.school-hd .tit{height: 52px;overflow: hidden;}
+.school-hd .tit .name{display:inline-block;max-width:600px;line-height: 52px;font-size:30px;font-weight:bold;vertical-align: middle;-webkit-text-shadow:2px 2px 5px rgba(34,36,38,0.35);-moz-text-shadow:2px 2px 5px rgba(34,36,38,0.35);text-shadow:2px 2px 5px rgba(34,36,38,0.35);white-space:nowrap;text-overflow:ellipsis;overflow: hidden;}
+.school-hd .tit .tab{display:inline-block;font-size:0;vertical-align: middle;}
+.school-hd .tit .tab span{display: inline-block;margin-left:10px;padding:0 8px;height: 20px;line-height: 20px;font-size:12px;color: #fff;border-radius:2px;overflow: hidden;}
+.school-hd .tit .tab .yellow{background-color: #ffbd20;}
+.school-hd .tit .tab .orange{background-color: #ff6420;}
+.school-hd .tit .tab .purple{background-color: #e749ff;}
+.school-hd .tit .tab .l-blue{background-color: #30dfff;}
+.school-hd .tit .tab .n-blue{background-color: #2d00bf;}
+.school-hd .info{margin-top:10px;height: 24px;line-height: 24px;overflow: hidden;}
+.school-hd .info .space{margin-left: 40px;}
+.school-hd .info .space:first-child{margin-left:0}
+.school-hd .school-right{position: absolute;right: 0;top: 50%;margin-top: -15px;}
+.school-hd .school-right .btn{width: 80px;color: #229fff;}
+/*学校主体*/
+.school-bd{}
+.school-bd .side-nav{float:left;display:block;width: 140px;overflow: hidden;}
+.school-bd .side-nav ul{}
+.school-bd .side-nav ul li{background-color: #fff;border-top: 1px solid #f0f0f0;}
+.school-bd .side-nav ul li:first-child{border-top: 0;}
+.school-bd .side-nav ul li.on{background-color: #33beff;color: #fff;}
+.school-bd .side-nav ul li a{display:block;height: 60px;line-height: 60px;font-size:16px;text-align: center;overflow: hidden;}
+.school-bd .side-nav ~.main{margin-left: 155px;}
+.school-bd .main{background-color: #fff;}
+/*文章内容*/
+.article{padding: 40px 60px;overflow: hidden;}
+.article .title{line-height:30px;font-size:20px;font-weight:bold;}
+.article .content{margin-top:15px;line-height:30px;min-height:600px;}
+.article .content p{margin-bottom:20px;}
+.article .content img{display:block;margin:20px 0 45px;width:100%\9;height:100%\9;}
+.article .content img{max-width:100%;max-height:100%;}
+.article .content .img{margin:20px 0 45px;}
+.article .content .img img{margin:0;}
+.article .content .code{margin:0;text-align:center;}
+.article .content .code img{margin:0 auto;width:150px;}
+/*文章幻灯片*/
+.article .swiper-container{width: 100%;height:500px;margin-left: auto;margin-right: auto;}
+.article .swiper-slide{background-size: cover;background-position: center;}
+.article .swiper-slide .slide-tit{position:absolute;bottom:0;left:0;width:100%;height: 40px;line-height: 40px;font-size:16px;color:#fff;text-align: center;background:rgba(0,0,0,0.5);overflow: hidden;}
+/*.article .gallery-top{height: 80%;width: 100%;}*/
+.article .gallery-thumbs{height: 150px;box-sizing: border-box;padding: 10px 0;}
+.article .gallery-thumbs .swiper-slide{height: 100%;opacity: 0.4;}
+.article .gallery-thumbs .swiper-slide-thumb-active{opacity: 1;}
+
+/*文章为空*/
+.tips-null{vertical-align: middle;text-align: center;padding:40px;}
+.tips-null .tips-img{display:block;margin:0 auto;}
+.tips-null .tips-img img{display:inline-block;width:300px;}
+
+/*文章专业*/
+.article-specialty{padding:10px 20px;background-color: #fff;}
+.article-specialty .tabs-hd{}
+.article-specialty .tabs-hd .tabs-nav{font-size: 0;border-bottom: 1px solid #f0f0f0}
+.article-specialty .tabs-hd .tabs-nav .tabs-tab{display: inline-block;min-width: 80px;margin-right: 30px;font-size: 14px;vertical-align: middle;text-align:center;overflow: hidden;}
+.article-specialty .tabs-hd .tabs-nav .on{height:38px;line-height:38px;font-size:16px;color: #33beff;border-bottom: 2px solid #33beff;}
+.article-specialty .tabs-bd{padding: 40px 0 0 15px;}
+.article-specialty .tabs-bd li{float:left;display:block;margin-bottom:10px;padding:0 10px;width: 25%;height: 40px;line-height: 40px;color:#666666;overflow: hidden;box-sizing: border-box;}
+.article-specialty .tabs-bd li a{display:inline-block;padding:0 10px;height: 40px;line-height: 40px;color:#666666;overflow: hidden;}
+.article-specialty .tabs-bd li:hover a{background-color: #229fff;color: #fff;border-radius: 2px;}

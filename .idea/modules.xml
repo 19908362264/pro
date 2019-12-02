@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mws.iml" filepath="$PROJECT_DIR$/mws.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-bks-b/mws-bks-b.iml" filepath="$PROJECT_DIR$/mws-bks-b/mws-bks-b.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-bks-backend/mws-bks-backend.iml" filepath="$PROJECT_DIR$/mws-bks-backend/mws-bks-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-bks-c/mws-bks-c.iml" filepath="$PROJECT_DIR$/mws-bks-c/mws-bks-c.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-bks-project/mws-bks-project.iml" filepath="$PROJECT_DIR$/mws-bks-project/mws-bks-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-commons/mws-commons.iml" filepath="$PROJECT_DIR$/mws-commons/mws-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-config-center/mws-config-center.iml" filepath="$PROJECT_DIR$/mws-config-center/mws-config-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-file-center/mws-file-center.iml" filepath="$PROJECT_DIR$/mws-file-center/mws-file-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-gateway-zuul/mws-gateway-zuul.iml" filepath="$PROJECT_DIR$/mws-gateway-zuul/mws-gateway-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-log-center/mws-log-center.iml" filepath="$PROJECT_DIR$/mws-log-center/mws-log-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-log-starter/mws-log-starter.iml" filepath="$PROJECT_DIR$/mws-log-starter/mws-log-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model.iml" filepath="$PROJECT_DIR$/mws-model/mws-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-base/mws-model-base.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-base/mws-model-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-bks/mws-model-bks.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-bks/mws-model-bks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-file/mws-model-file.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-file/mws-model-file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-log/mws-model-log.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-log/mws-model-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-notification/mws-model-notification.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-notification/mws-model-notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-oauth/mws-model-oauth.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-oauth/mws-model-oauth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-model/mws-model-result/mws-model-result.iml" filepath="$PROJECT_DIR$/mws-model/mws-model-result/mws-model-result.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-monitor-center/mws-monitor-center.iml" filepath="$PROJECT_DIR$/mws-monitor-center/mws-monitor-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-notification-center/mws-notification-center.iml" filepath="$PROJECT_DIR$/mws-notification-center/mws-notification-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-oauth-center/mws-oauth-center.iml" filepath="$PROJECT_DIR$/mws-oauth-center/mws-oauth-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-register-center/mws-register-center.iml" filepath="$PROJECT_DIR$/mws-register-center/mws-register-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8761/mws-register-center-8761.iml" filepath="$PROJECT_DIR$/mws-register-center/mws-register-center-8761/mws-register-center-8761.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8762/mws-register-center-8762.iml" filepath="$PROJECT_DIR$/mws-register-center/mws-register-center-8762/mws-register-center-8762.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-register-center/mws-register-center-8763/mws-register-center-8763.iml" filepath="$PROJECT_DIR$/mws-register-center/mws-register-center-8763/mws-register-center-8763.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-test-client/mws-test-client.iml" filepath="$PROJECT_DIR$/mws-test-client/mws-test-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mws-user-center/mws-user-center.iml" filepath="$PROJECT_DIR$/mws-user-center/mws-user-center.iml" />
+    </modules>
+  </component>
+</project>

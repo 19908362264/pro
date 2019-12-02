@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksProvinceDao">
+
+    <select id="getDistrict" resultType="com.benwunet.bks.model.BksProvince">
+        select * from bks_province p
+        where parent_id = "0"
+        order by p.id desc
+    </select>
+
+    <select id="getSchool" resultType="com.benwunet.bks.model.BksHighschool">
+        select * from bks_highschool h
+        where province_id = #{provinceId}
+        order by h.id desc
+    </select>
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,703 @@
+package com.benwunet.bks.controller.tourists;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.benwunet.bks.model.*;
+import com.benwunet.bks.dto.MajorCategory;
+import com.benwunet.bks.model.dto.BksSchoolDTO;
+import com.benwunet.bks.model.dto.BksSchoolScoreDTO;
+import com.benwunet.bks.service.*;
+import com.benwunet.mws.model.result.ResponseResult;
+import com.benwunet.mws.model.result.ResultCode;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import java.util.*;
+
+@RestController
+@RequestMapping("/bks-anon")
+@Api(value = "学校专业相关", tags = "学校专业相关")
+public class TouristsController {
+
+    @Autowired
+    private BaseService baseService;
+
+    @Autowired
+    private BksUserService userService;
+
+    @Autowired
+    private BksCampusService campusService;
+
+    @Autowired
+    private BksMajorCategoryService bksMajorCategoryService;
+
+    @Autowired
+    private BksUserSchoolMajorService bksUserSchoolMajorService;
+
+    @Autowired
+    private BksMajorService bksMajorService;
+
+    @Autowired
+    private BksProvinceService provinceService;
+
+    @Autowired
+    private BksRemarkService bksRemarkService;
+
+    @Autowired
+    private BksSchoolService bksSchoolService;
+
+    @Autowired
+    BksMajorPresentationService majorPresentationService;
+
+    @Autowired
+    private BksSchoolScoreService bksSchoolScoreService;
+
+    @Autowired
+    private BksMajorCategoryService majorCategoryService;
+
+    private static Double fraction = 20.00;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    BksUniversityEnrollGdfService universityEnrollGdfService;
+
+    /**
+     * 查询本科或专科专业类别接口
+     *
+     * @param collegesId
+     * @return ResponseResult
+     * @author FC
+     * @date 2019/6/18 9:03
+     */
+    @GetMapping("/special/colleges/{collegesId}")
+    public ResponseResult getCategory(@PathVariable("collegesId") String collegesId) {
+        List<BksMajorCategory> list = userService.getCategory(collegesId);
+        if (list == null) {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "查询失败", null);
+        }
+        return ResponseResult.app(0, ResultCode.PT_OK, "查询成功", list);
+    }
+
+    /**
+     * 查询campus接口
+     *
+     * @author FC
+     * @date 2019/6/18 13:59
+     */
+    @GetMapping("/getcampus")
+    public ResponseResult getCampus() {
+
+        List<BksCampus> list = campusService.list(new QueryWrapper<BksCampus>().select("campus_id", "campus_name"));
+
+        if (list == null) {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "查询失败", null);
+        } else {
+            return ResponseResult.app(0, ResultCode.PT_OK, "查询成功", list);
+        }
+    }
+
+    /**
+     * 查询学校详情
+     *
+     * @param school_id
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/schoolInformation")
+    @ApiOperation(value = "查询学校详情", notes = "查询学校详情")
+    public ResponseResult getOneSchool(
+            @ApiParam(value = "学校ID", required = true) String school_id,
+            @ApiParam(value = "用户Id", required = true) String userId) {
+
+        Map school = redisTemplate.opsForHash().entries("schoolInformation" + school_id);
+        if (!school.isEmpty()) {
+            return ResponseResult.page(0, "学校详情查询", null, school);
+        }
+        BksSchoolDTO oneSchool = bksSchoolService.getOneSchool(school_id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("school_id", oneSchool.getSchoolId());
+        map.put("school_name", oneSchool.getSchoolName());
+        map.put("province_name", oneSchool.getProvinceName());
+        map.put("city_name", oneSchool.getCityName());
+        map.put("town_name", oneSchool.getTownName());
+        map.put("campus_name", oneSchool.getCampusName());
+        map.put("colleges_name", oneSchool.getCollegesName());
+        map.put("f211", oneSchool.getF211());
+        map.put("f985", oneSchool.getF985());
+        map.put("department", oneSchool.getDepartment());
+        map.put("admissions", oneSchool.getAdmissions());
+        map.put("central", oneSchool.getCentral());
+        map.put("is_seal", oneSchool.getIsSeal());
+        map.put("email", oneSchool.getEmail());
+        map.put("site", oneSchool.getSite());
+        map.put("phone", oneSchool.getPhone());
+        map.put("school_nature_name", oneSchool.getSchoolNatureName());
+
+        if (userId != null && !userId.equals("")) {
+            Integer concern = bksUserSchoolMajorService.getSchoolConcern(userId, school_id);
+            map.put("is_attention", concern == null ? 0 : 1);
+        } else {
+            map.put("is_attention", 0);
+        }
+        redisTemplate.opsForHash().putAll("schoolInformation" + school_id, map);
+
+
+        return ResponseResult.page(0, "学校详情查询", null, map);
+    }
+
+
+    /**
+     * 查询专业详情
+     *
+     * @param major_category_id
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/majorInformation")
+    @ApiOperation(value = "查询专业详情", notes = "查询专业详情")
+    public ResponseResult getOne(
+            @ApiParam(value = "专业编号", required = true) String major_category_id) {
+        Map majorInformation = redisTemplate.opsForHash().entries("majorInformation" + major_category_id);
+        if (!majorInformation.isEmpty()) {
+            return ResponseResult.app(0, 0, null, majorInformation);
+        }
+        try {
+            QueryWrapper<BksMajorCategory> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("major_category_id", major_category_id);
+            BksMajorCategory one = bksMajorCategoryService.getOne(queryWrapper);
+            List<BksMajor> majorInformationList = bksMajorService.getMajorInformationList(major_category_id);
+            Map<String, Object> map = new HashMap<>();
+            map.put("degree", one.getBachelorDegree() == null ? "未知" : one.getBachelorDegree());
+            map.put("code", one.getCode());
+            map.put("level", one.getLevel1Name() == null ? "未知" : one.getLevel1Name());
+            map.put("course", one.getLearnWhat());
+            map.put("smallClass", one.getLevel2Name());
+            map.put("majorName", one.getMajorCategoryName());
+            map.put("bigClass", one.getLevel3Name());
+            map.put("count", majorInformationList.size());
+            redisTemplate.opsForHash().putAll("majorInformation" + major_category_id, map);
+            return ResponseResult.app(0, ResultCode.PT_OK, "查询专业详情", map);
+        } catch (Exception e) {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "此专业不存在", "");
+        }
+    }
+
+    /**
+     * 查询开设某专业的学校信息
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/major")
+    @ApiOperation(value = "查询开设某专业的学校信息", notes = "查询开设某专业的学校信息")
+    public ResponseResult getList(
+            @ApiParam(value = "专业名称模糊查询", required = true) String majorName,
+            @ApiParam(value = "zk:专科，bk:本科", required = false) String text,
+            @ApiParam(value = "当前页", required = true) Integer page,
+            @ApiParam(value = "专业编号", required = true) String userId) {
+      /* Map major = redisTemplate.opsForHash().entries("major"+String.valueOf(page));
+        if (!major.isEmpty()){
+            return ResponseResult.page(0, "专业查询", null, major);
+        }*/
+        QueryWrapper<BksMajorCategory> query = new QueryWrapper<>();
+        if (majorName == null || majorName.equals("")) {
+            if (text == null || text.equals("bk")) {
+                query.eq("level1", 1);
+            } else if (text.equals("zk")) {
+                query.eq("level1", 2);
+            } else {
+                QueryWrapper<BksMajorCategory> qr = new QueryWrapper<>();
+                qr.eq("level1", text);
+                qr.eq("parent_id", 0);
+                BksMajorCategory one = bksMajorCategoryService.getOne(qr);
+                if (one == null) {
+                    return ResponseResult.app(1, 0, "该专业不存在", "");
+                }
+                query.eq("level1", one.getCollegesId().equals("2001") ? "1" : "2");
+                query.eq("level2", text);
+            }
+        }
+        query.eq("parent_id", 2);
+        query.like("major_category_name", majorName);
+        int total = bksMajorCategoryService.count(query);
+        if (total < 0) {
+            return ResponseResult.app(1, 0, "该专业不存在", "");
+        }
+        Page<BksMajorCategory> pageQuery = new Page<>(page, 10, total);
+        IPage<BksMajorCategory> data = bksMajorCategoryService.page(pageQuery, query);
+        Map<String, Object> dataMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (BksMajorCategory record : data.getRecords()) {
+            Map<String, Object> map = new HashMap<>();
+            Integer concern = bksUserSchoolMajorService.getMajorConcern(userId, record.getMajorCategoryId());
+            Integer majorInformationListCount = bksMajorService.getMajorInformationListCount(record.getMajorCategoryId());
+            map.put("major_category_id", record.getMajorCategoryId());
+            map.put("code", record.getCode() == null ? "暂无" : record.getCode());
+            map.put("level1", record.getLevel1());
+            map.put("level2", record.getLevel2());
+            map.put("level3", record.getLevel3());
+            map.put("major_category_name", record.getMajorCategoryName() == null ? "暂无" : record.getMajorCategoryName());
+            map.put("level1_name", record.getLevel1Name());
+            map.put("level2_name", record.getLevel2Name());
+            map.put("level3_name", record.getLevel3Name());
+            map.put("num_school", majorInformationListCount);
+            map.put("major_level", record.getLevel1Name());
+            map.put("bachelor_degree", record.getBachelorDegree() == null ? "暂无" : record.getBachelorDegree());
+            map.put("course", record.getCourse() == null ? "暂无" : record.getCourse());
+            map.put("is_attention", concern == null ? 0 : 1);
+            list.add(map);
+        }
+        dataMap.put("status", 0);
+        dataMap.put("msg", "");
+        dataMap.put("total", total);
+        dataMap.put("page", page);
+        dataMap.put("majors", list);
+        /* redisTemplate.opsForHash().putAll("major"+String.valueOf(page), dataMap);*/
+        return ResponseResult.page(0, "专业查询", null, dataMap);
+
+    }
+
+    /**
+     * 查询学校总数信息
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/schoolCount")
+    public int getSchoolListCount(String schoolName, String provinceId, String levelId, String kindId, String tx) {
+
+        try {
+            return bksSchoolService.getSchoolListCount(schoolName, provinceId, levelId, kindId, tx);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("输入信息有误");
+
+        }
+
+    }
+
+    /**
+     * 查询学校信息
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/school")
+    @ApiOperation(value = "查询学校信息", notes = "查询学校信息")
+    public ResponseResult getSchoolList(
+            @ApiParam(value = "学校名称", required = false) String schoolName,
+            @ApiParam(value = "省市编号", required = true) String provinceId,
+            String levelId,
+            String kindId,
+            Integer page,
+            String userId,
+            String tx) {
+        if (schoolName == null) {
+            schoolName = "";
+        }
+        if (provinceId == null || provinceId.equals("0")) {
+            provinceId = "";
+        }
+        if (levelId == null || levelId.equals("0")) {
+            levelId = "";
+        }
+        if (kindId == null || kindId.equals("0")) {
+            kindId = "";
+        }
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        List<BksSchoolDTO> schoolList = bksSchoolService.getSchoolList(schoolName, provinceId, levelId, kindId, (page - 1) * 10, tx);
+        if (CollectionUtils.isEmpty(schoolList)) {
+            return ResponseResult.app(1, 0, "输入信息有误,请重新输入", "");
+        }
+        int schoolListCount = bksSchoolService.getSchoolListCount(schoolName, provinceId, levelId, kindId, tx);
+        Map<String, Object> dataMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (BksSchoolDTO bksSchoolDTO : schoolList) {
+            Map<String, Object> map = new HashMap<>(1);
+            Integer concern = bksUserSchoolMajorService.getSchoolConcern(userId, bksSchoolDTO.getSchoolId());
+            List<BksSchoolDTO> schoolMajorList = getSchoolMajorList(bksSchoolDTO.getSchoolId(), "");
+            // List<BksSchoolDTO> schoolMajorList= bksSchoolService.getSchoolAndMajorList(bksSchoolDTO.getSchoolId());
+            String str = "";
+            for (BksSchoolDTO schoolDTO : schoolMajorList) {
+                str += schoolDTO.getMajorName() + " ";
+            }
+            if (str.length() > 25) {
+                str = str.substring(0, 25) + "...";
+            }
+            map.put("major_name", str);
+            map.put("school_id", bksSchoolDTO.getSchoolId());
+            map.put("school_name", bksSchoolDTO.getSchoolName());
+            map.put("province_name", bksSchoolDTO.getProvinceName());
+            map.put("campus_name", bksSchoolDTO.getCampusName());
+            map.put("colleges_name", bksSchoolDTO.getCollegesName());
+            map.put("is_attention", concern == null ? 0 : 1);
+            list.add(map);
+        }
+        dataMap.put("status", 0);
+        dataMap.put("msg", "");
+        dataMap.put("total", schoolListCount);
+        dataMap.put("page", page);
+        dataMap.put("majors", list);
+        return ResponseResult.page(0, "学校查询", null, dataMap);
+    }
+
+
+    /**
+     * 查询某学校开设的专业
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/schoolMajor")
+    @ApiOperation(value = "查询某学校开设的专业", notes = "查询某学校开设的专业")
+    public List<BksSchoolDTO> getSchoolMajorList(String schoolId, String text) {
+        List<BksSchoolDTO> schoolMajorList = new ArrayList<>();
+        Map<String, Object> dataMap = new HashMap<>();
+
+        if (text == null || text.equals("all")) {
+            schoolMajorList = bksSchoolService.getSchoolMajorList(schoolId);
+        } else {
+            schoolMajorList = bksSchoolService.getSchoolMajorLimitList(schoolId);
+        }
+        return schoolMajorList;
+    }
+
+
+    /**
+     * 查询开设某专业的学校
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/majorSchool")
+    @ApiOperation(value = "查询开设某专业的学校", notes = "查询开设某专业的学校")
+    public ResponseResult getMajorSchoolList(String majorId, Integer page) {
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        List<Map<String, Object>> list = new ArrayList<>();
+        Map<String, Object> dataMap = new HashMap<>(1);
+        List<BksSchoolDTO> majorSchoolList = bksSchoolService.getMajorSchoolList(majorId, (page - 1) * 10);
+        for (BksSchoolDTO bksSchoolDTO : majorSchoolList) {
+            Map<String, Object> map = new HashMap<>(1);
+            map.put("school_name", bksSchoolDTO.getSchoolName());
+            list.add(map);
+        }
+        dataMap.put("major", majorSchoolList.get(0).getMajorName());
+        dataMap.put("schools", list);
+
+        return ResponseResult.page(0, "根据专业查询学校", null, dataMap);
+    }
+
+
+    /**
+     * 点击量查询
+     *
+     * @return
+     */
+    @GetMapping("/remark")
+    public ResponseResult queryRemark(String majorId) {
+
+        QueryWrapper<BksRemark> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("major_id", majorId);
+        BksRemark remark = bksRemarkService.getOne(queryWrapper);
+        return ResponseResult.app(0, 0, "网友点评", remark);
+    }
+
+
+    @GetMapping("/remarkResult")
+    public ResponseResult queryRemark(String majorId, String str) {
+        QueryWrapper<BksRemark> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("major_id", majorId);
+        BksRemark remark = bksRemarkService.getOne(queryWrapper);
+        if (remark == null) {
+            remark = new BksRemark();
+            remark.setMajorId(majorId);
+        }
+        if (str == null || str.equals("") || str.equals("想报考")) {
+            int remark1 = remark.getRemark1();
+            remark1 += 1;
+            remark.setRemark1(remark1);
+        } else if (str.equals("不想报考")) {
+            int remark2 = remark.getRemark2();
+            remark2 += 1;
+            remark.setRemark2(remark2);
+        } else if (str.equals("还没想好")) {
+            int remark3 = remark.getRemark3();
+            remark3 += 1;
+            remark.setRemark3(remark3);
+        }
+        bksRemarkService.saveOrUpdate(remark);
+        return ResponseResult.app(0, 0, "网友点评结果", "");
+
+    }
+
+
+    /*  private String key(String num) {
+          if (num.equals("想报考")) {
+              return "key1";
+          } else if (num.equals("不想报考")) {
+              return "key2";
+          }
+          else if (num.equals("没想好")) {
+              return "key3";
+          }
+          return "";
+      }
+  */
+    @Autowired
+    private BksProvinceService bksProvinceService;
+
+    @GetMapping("/province")
+    public ResponseResult getProvince() {
+        QueryWrapper<BksProvince> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", "0");
+        List<BksProvince> list = bksProvinceService.list(queryWrapper);
+        return ResponseResult.app(0, 0, "", list);
+    }
+
+
+    /**
+     * 查询省市区 接口
+     *
+     * @author FC
+     * @date 2019/6/19 13:59
+     */
+    @GetMapping("/getditricts")
+    public ResponseResult getDistricts() {
+        List<BksProvince> list = provinceService.list(new QueryWrapper<BksProvince>().select("province_id", "province_name"));
+        if (list == null) {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "查询地区失败", null);
+        }
+        return ResponseResult.app(0, ResultCode.PT_OK, "查询地区成功", list);
+    }
+
+
+    @GetMapping("/major/category/{school}")
+    public ResponseResult queryMajorCategory(@PathVariable Integer school, String name, Integer page) {
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        List<MajorCategory> list = baseService.findMajorCategory(school, name, (page - 1) * 10);
+        Integer total = baseService.findMajorCategoryCount(school, name);
+        Map<String, Object> data = new HashMap<>();
+        data.put("total", total);
+        data.put("current", page);
+        data.put("data", list);
+        return ResponseResult.app(0, 0, "", data);
+    }
+
+
+    /**
+     * 查询专业详情(bks_major_presentation) 接口
+     *
+     * @param majorId
+     * @return ResponseResult
+     * @author FC
+     */
+    @GetMapping("/getMajorContent")
+    public ResponseResult getMajorContent(String majorId) {
+        BksMajorPresentation majorPresentation = majorPresentationService.getOne(new QueryWrapper<BksMajorPresentation>().eq("major_id", majorId));
+        if (majorPresentation != null) {
+            String content = majorPresentation.getContent();
+            return ResponseResult.app(0, ResultCode.PT_OK, "查询成功", content);
+        } else {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "查询失败", null);
+        }
+
+    }
+
+    /**
+     * 志愿预测
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/voluntaryForecasting")
+    public ResponseResult getVoluntaryForecasting(String cityId, String schoolProvinceId, String type, String score, String userId, Integer page) {
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        if (userId == null || userId.equals("")) {
+            userId = "0";
+        }
+        Map<String, Object> dataMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<BksSchoolScoreDTO> voluntaryForecasting = bksSchoolScoreService.getVoluntaryForecasting(cityId, schoolProvinceId, type, score, (page - 1) * 10);
+        for (BksSchoolScoreDTO bksSchoolScoreDTO : voluntaryForecasting) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("school_id", bksSchoolScoreDTO.getSchoolId());
+            map.put("school_name", bksSchoolScoreDTO.getSchoolName());
+            map.put("province_name", bksSchoolScoreDTO.getProvinceName());
+            map.put("campus_name", bksSchoolScoreDTO.getCampusName());
+            map.put("colleges_name", bksSchoolScoreDTO.getCollegesName());
+            Map<String, Object> mapData = new HashMap<>();
+            mapData.put("year", bksSchoolScoreDTO.getYear());
+            mapData.put("min", bksSchoolScoreDTO.getMin());
+            mapData.put("avg", bksSchoolScoreDTO.getAvg());
+            mapData.put("max", bksSchoolScoreDTO.getMax());
+            mapData.put("province_score", bksSchoolScoreDTO.getProvinceScore());
+            map.put("school_score", mapData);
+            List<BksSchoolDTO> schoolMajorList = bksSchoolService.getSchoolMajorLimitList(bksSchoolScoreDTO.getSchoolId());
+            //List<BksSchoolDTO> schoolMajorList = bksSchoolService.getSchoolAndMajorLimitList(bksSchoolScoreDTO.getSchoolId());
+            String str = "";
+            for (BksSchoolDTO schoolDTO : schoolMajorList) {
+                str += schoolDTO.getMajorName() + " ";
+            }
+            map.put("major", str);
+            if (Double.parseDouble(bksSchoolScoreDTO.getMin()) < Double.parseDouble(score) && Double.parseDouble(score) < Double.parseDouble(bksSchoolScoreDTO.getMin()) + fraction) {
+                map.put("level", "<span class=\"red\">风险较大</span>");
+            } else if (Double.parseDouble(bksSchoolScoreDTO.getMin()) + fraction < Double.parseDouble(score) && Double.parseDouble(score) < Double.parseDouble(bksSchoolScoreDTO.getMin()) + fraction * 2) {
+                map.put("level", "<span class=\"orange\">风险较小</span>");
+            } else if (Double.parseDouble(score) < Double.parseDouble(bksSchoolScoreDTO.getMin()) + fraction * 2 + fraction / 2) {
+                map.put("level", "<span class=\"green\">风险一般</span>");
+            } else {
+                map.put("level", "<span class=\"blue\">风险很小</span>");
+            }
+            Integer concern = bksUserSchoolMajorService.getSchoolConcern(userId, bksSchoolScoreDTO.getSchoolId());
+            map.put("is_attention", concern == null ? 0 : 1);
+            list.add(map);
+        }
+        Integer voluntaryForecastingCount = bksSchoolScoreService.getVoluntaryForecastingCount(cityId, schoolProvinceId, type, score);
+        dataMap.put("status", 0);
+        dataMap.put("msg", "志愿预测");
+        dataMap.put("total", voluntaryForecastingCount);
+        dataMap.put("page", page);
+        dataMap.put("schools", list);
+        return ResponseResult.page(0, "志愿预测", Integer.valueOf(voluntaryForecastingCount).longValue(), dataMap);
+
+    }
+
+
+    /**
+     * 历年分数线
+     *
+     * @param
+     * @return
+     * @author zuoli
+     */
+    @GetMapping("/getBorderline")
+    public Map<String, Object> getBorderline(String schoolId, Integer page) {
+
+        if (page == null || page == 0) {
+            page = 1;
+        }
+        Map<String, Object> dataMap = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<BksSchoolScoreDTO> borderline = bksSchoolScoreService.getBorderline(schoolId, (page - 1) * 10);
+        for (BksSchoolScoreDTO bksSchoolScoreDTO : borderline) {
+            Map<String, Object> mapData = new HashMap<>();
+            mapData.put("year", bksSchoolScoreDTO.getYear());
+            mapData.put("min", bksSchoolScoreDTO.getMin());
+            mapData.put("batch", bksSchoolScoreDTO.getBatch());
+            mapData.put("type", bksSchoolScoreDTO.getType());
+            mapData.put("avg", bksSchoolScoreDTO.getAvg());
+            mapData.put("max", bksSchoolScoreDTO.getMax());
+            mapData.put("province_score", bksSchoolScoreDTO.getProvinceScore());
+            list.add(mapData);
+        }
+        Integer borderlineCount = bksSchoolScoreService.getBorderlineCount(schoolId);
+        dataMap.put("status", 0);
+        dataMap.put("msg", "分数线");
+        dataMap.put("total", borderlineCount);
+        dataMap.put("page", page);
+        dataMap.put("schools", list);
+
+        return dataMap;
+    }
+
+
+    /**
+     * 获取专业概况 接口
+     * <p>
+     * course--核心课程
+     * introduce--专业介绍
+     * effect--就业方向
+     * content--综合介绍
+     *
+     * @param categoryId
+     * @return ResponseResult -- map
+     * @author FC
+     * @date 2019/6/21 10:06
+     */
+    @GetMapping("/getmajorintroduce")
+    public ResponseResult getMajorIntroduce(String categoryId) {
+        BksMajorCategory category = majorCategoryService.getOne(new QueryWrapper<BksMajorCategory>().eq("major_category_id", categoryId));
+        if (category != null) {
+            Map<String, String> map = new HashMap<>(4);
+            map.put("course", category.getCourse());
+            map.put("introduce", category.getIntroduce());
+            map.put("effect", category.getEffect());
+            map.put("content", category.getContent());
+            map.put("job", category.getJob());
+            map.put("do_what", category.getDoWhat());
+            map.put("subject", category.getSubjectAdvise());
+            map.put("degree", category.getBachelorDegree());
+            map.put("studyYear", category.getStudyDuration());
+
+            return ResponseResult.app(0, ResultCode.PT_OK, "查询成功", map);
+        } else {
+            return ResponseResult.app(1, ResultCode.PT_ERROR, "查询失败", null);
+        }
+    }
+
+    /**
+     * 获取专业类
+     *
+     * @author liushuangqing
+     * @date 2019/11/23 16:23
+     */
+    @ApiOperation("获取专业")
+    @GetMapping("/getMajor")
+    public ResponseResult getMajor() {
+        List<String> major = majorCategoryService.getMajor();
+        return new ResponseResult(0, 0, "", major);
+    }
+
+    /**
+     * 获取专业类
+     *
+     * @author liushuangqing
+     * @date 2019/11/23 16:23
+     */
+    @ApiOperation("匹配大学")
+    @GetMapping("/matchUniversity")
+    public ResponseResult matchUniversity(String provinceId, Double score, Integer page, Integer limit) {
+        Page<BksSchool> pageQuery = new Page<>(page,limit);
+        IPage<BksSchool> pages = bksSchoolService.matchUniversity(provinceId,score,pageQuery);
+        return new ResponseResult(0,"",(int)pages.getTotal(),pages.getRecords());
+    }
+    /**
+     * 获取专业类
+     *
+     * @author liushuangqing
+     * @date 2019/11/23 16:23
+     */
+    @ApiOperation("匹配专业")
+    @GetMapping("/matchMajor")
+    public ResponseResult matchMajor(String provinceId, Double score) {
+        List<BksUniversityEnrollGdf> enrollGdfList = universityEnrollGdfService.matchMajor(provinceId,score);
+        return new ResponseResult(0,0,"",enrollGdfList);
+    }
+}

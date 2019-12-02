@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benwunet.bks.dao.BksProfessorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benwunet.bks.model.BksProfessor">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="professor_name" property="professorName" />
+        <result column="mobile" property="mobile" />
+        <result column="head_img" property="headImg" />
+        <result column="professor_type" property="professorType" />
+        <result column="skilled_field" property="skilledField" />
+        <result column="introduction" property="introduction" />
+        <result column="guide_year" property="guideYear" />
+        <result column="charging_standard" property="chargingStandard" />
+        <result column="accept_num" property="acceptNum" />
+        <result column="status" property="status" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="operator_id" property="operatorId" />
+        <result column="operator_name" property="operatorName" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, professor_name, mobile, head_img, professor_type, skilled_field, introduction, guide_year, charging_standard, accept_num, status, gmt_create, gmt_modified, operator_id, operator_name, remark
+    </sql>
+
+</mapper>
